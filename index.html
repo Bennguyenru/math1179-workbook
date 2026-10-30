@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tài liệu ôn tập MATH1179 Mathematics for Computer Science: làm bài trực tiếp, gợi ý và tự kiểm tra đáp án.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>MATH1179 Workbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: exercise-book sheet on graph paper, chapter rail on the left, one chapter per view, symbol strip docked at the bottom */
+:root{
+  --paper:#eef2f8; --sheet:#ffffff; --ink:#17233a; --muted:#56637c; --rule:#c4d3ea; --grid:rgba(40,86,170,.07);
+  --navy:#1f3f7a; --navy-ink:#ffffff; --tint:#e6edf9; --hint:#fff4c2; --hint-ink:#4a3b00;
+  --ok:#1b7546; --ok-bg:#e1f3e8; --bad:#b0302a; --bad-bg:#fbe6e4;
+  --c0:#1f3f7a; --c1:#d27a1f; --c2:#23897d; --c3:#8a4fd6; --c4:#8a94a8;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0d1320; --sheet:#141c2c; --ink:#e4eaf6; --muted:#97a4bd; --rule:#2a3a58; --grid:rgba(120,160,255,.06);
+  --navy:#9bb8ff; --navy-ink:#0d1320; --tint:#1c2840; --hint:#3a3112; --hint-ink:#f5e6a8;
+  --ok:#5cc98e; --ok-bg:#11301f; --bad:#ff8a80; --bad-bg:#3a1714;
+  --c0:#9bb8ff; --c1:#f0a14e; --c2:#4fc7b8; --c3:#bb8bff; --c4:#7d889e; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#0d1320; --sheet:#141c2c; --ink:#e4eaf6; --muted:#97a4bd; --rule:#2a3a58; --grid:rgba(120,160,255,.06);
+  --navy:#9bb8ff; --navy-ink:#0d1320; --tint:#1c2840; --hint:#3a3112; --hint-ink:#f5e6a8;
+  --ok:#5cc98e; --ok-bg:#11301f; --bad:#ff8a80; --bad-bg:#3a1714;
+  --c0:#9bb8ff; --c1:#f0a14e; --c2:#4fc7b8; --c3:#bb8bff; --c4:#7d889e; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font:16px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+button{font:inherit;color:inherit}
+a{color:var(--navy)}
+:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--sheet);border-bottom:2px solid var(--navy);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+.top-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto;min-width:0}
+.brand b{font:700 22px/1 var(--f-display);color:var(--navy);letter-spacing:.01em}
+.brand span{color:var(--muted);font-size:14px}
+.ov{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{width:140px;height:8px;border-radius:4px;background:var(--tint);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.resetbox{display:flex;gap:8px;align-items:center;font-size:14px}
+.layout{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 110px}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);align-self:start;display:flex;flex-direction:column;gap:2px;max-height:calc(100vh - 110px);overflow:auto}
+.toc-i{display:grid;grid-template-columns:26px 1fr auto;grid-template-areas:"n t c" "n p p";column-gap:8px;padding:7px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:14.5px;line-height:1.25}
+.toc-i:hover{background:var(--tint)}
+.toc-i.cur{background:var(--navy);color:var(--navy-ink)}
+.tn{grid-area:n;font:700 15px/1.3 var(--f-display);opacity:.8}
+.tt{grid-area:t;min-width:0}
+.tc{grid-area:c;font-size:12px;opacity:.75;font-variant-numeric:tabular-nums}
+.tp{grid-area:p;height:3px;border-radius:2px;background:var(--rule);margin-top:5px;overflow:hidden}
+.tp i{display:block;height:100%;background:var(--ok)}
+.toc-i.cur .tp{background:rgba(255,255,255,.25)}
+main{min-width:0;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:28px clamp(16px,4vw,44px) 36px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px}
+.chhead{border-bottom:2px solid var(--navy);padding-bottom:14px;margin-bottom:8px}
+.eyebrow{margin:0;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chhead h2{margin:4px 0 0;font:700 clamp(30px,5vw,44px)/1.05 var(--f-display);color:var(--navy);text-wrap:balance}
+.vi{margin:4px 0 0;color:var(--muted);font-size:17px}
+.intro{margin:12px 0 0;padding:10px 14px;background:var(--tint);border-radius:6px;font-size:15px;max-width:70ch}
+h3.sec{font:700 22px/1.2 var(--f-display);color:var(--navy);margin:36px 0 0;padding-top:14px;border-top:1px dashed var(--rule)}
+.q{padding:22px 0;border-bottom:1px solid var(--rule)}
+.qhead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start}
+.qno{font:700 18px/1 var(--f-display);color:var(--navy-ink);background:var(--navy);min-width:34px;height:34px;padding:0 6px;border-radius:17px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.qtext p{margin:4px 0 0;max-width:75ch}
+.parts{display:flex;flex-direction:column;gap:6px;margin:14px 0 0 48px}
+.part{padding:6px 10px;border-radius:6px;border-left:3px solid transparent}
+.part.ok{background:var(--ok-bg);border-left-color:var(--ok)}
+.part.bad{background:var(--bad-bg);border-left-color:var(--bad)}
+.prow{display:grid;grid-template-columns:minmax(120px,240px) minmax(0,1fr) 22px;gap:12px;align-items:center}
+.t-grid .prow,.t-open .prow{grid-template-columns:minmax(0,1fr) 22px}
+.t-grid .plabel,.t-open .plabel{grid-column:1/-1}
+.plabel{font-size:15px}
+.pfield{min-width:0}
+.ans,.cell{font:15px/1.4 var(--f-mono);color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-bottom:2px solid var(--navy);border-radius:4px 4px 0 0;padding:6px 9px;width:100%;max-width:220px}
+.ans.wide{max-width:520px}
+textarea.ans{max-width:none;font-family:var(--f-body);resize:vertical}
+.ans::placeholder,.cell::placeholder{color:var(--muted);opacity:.7}
+.mark{font:700 18px/1 var(--f-display);text-align:center}
+.part.ok .mark{color:var(--ok)}
+.part.bad .mark{color:var(--bad)}
+.pmsg{font-size:13.5px;color:var(--bad);margin:4px 0 0}
+.pans{font-size:14.5px;margin:6px 0 0;color:var(--ink);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.pans>span:first-child{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.self{display:inline-flex;gap:6px;align-items:center;font-size:13.5px;color:var(--muted)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+.opt{border:1px solid var(--rule);background:var(--sheet);padding:5px 12px;border-radius:16px;cursor:pointer;font-size:14.5px;text-align:left}
+.opt:hover{border-color:var(--navy)}
+.opt.on{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.scroll{display:block;overflow-x:auto;max-width:100%}
+table.grid{border-collapse:collapse;margin:6px 0;font-variant-numeric:tabular-nums}
+table.grid th,table.grid td{border:1px solid var(--rule);padding:3px 6px;text-align:center;font-size:14px;white-space:nowrap}
+table.grid th{background:var(--tint);font-weight:600}
+table.grid td.fix{font-family:var(--f-mono);color:var(--muted)}
+table.grid .cell{width:64px;max-width:none;text-align:center;padding:3px 4px;border-radius:3px}
+table.tt .cell{width:44px}
+.cell.is-ok{background:var(--ok-bg);border-bottom-color:var(--ok)}
+.cell.is-bad{background:var(--bad-bg);border-bottom-color:var(--bad)}
+table.mini td,table.mini th{font-size:13px;padding:2px 6px}
+.qact{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 0 48px}
+.btn,.sm{border:1px solid var(--rule);background:var(--sheet);border-radius:6px;padding:7px 14px;cursor:pointer;font-weight:600;font-size:14.5px;text-decoration:none;color:var(--ink);display:inline-block}
+.sm{padding:3px 10px;font-size:13px;font-weight:400}
+.btn:hover,.sm:hover{border-color:var(--navy)}
+.btn.primary{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.btn.ghost{border-color:transparent;color:var(--muted);font-weight:400}
+.qscore{font-size:14px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.qscore.full{color:var(--ok);font-weight:600}
+.hint{margin:12px 0 0 48px;padding:10px 14px;background:var(--hint);color:var(--hint-ink);border-radius:4px;max-width:75ch;font-size:15px}
+.sol{margin:12px 0 0 48px;padding:4px 0 0 14px;border-left:3px solid var(--navy);max-width:80ch;font-size:15px}
+.sol:empty{display:none}
+.sol p{margin:6px 0}
+.figs{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0}
+.figs figure{margin:0;min-width:0;max-width:100%}
+figcaption{font-size:13px;color:var(--muted);text-align:center}
+svg.plot{width:100%;max-width:380px;height:auto;display:block;font-family:var(--f-body)}
+svg.venn{max-width:260px}
+.plot .g{stroke:var(--rule);stroke-width:.6}
+.plot .ax{stroke:var(--muted);stroke-width:1.2}
+.plot .tk{fill:var(--muted);font-size:10px}
+.plot .tk2{fill:var(--ink);font-size:12px}
+.plot .vl{fill:var(--ink);font-size:10.5px;font-weight:600}
+.plot .fn{fill:none;stroke-width:2.2}
+.plot .bar{fill:var(--c0);opacity:.85}
+.plot .poly{fill-opacity:.18;stroke-width:1.6}
+.plot .lbl{font-size:10.5px;font-weight:600}
+.c0{stroke:var(--c0);fill:var(--c0)}.c1{stroke:var(--c1);fill:var(--c1)}.c2{stroke:var(--c2);fill:var(--c2)}.c3{stroke:var(--c3);fill:var(--c3)}.c4{stroke:var(--c4);fill:var(--c4)}
+path.fn.c0,path.fn.c1,path.fn.c2,path.fn.c3,polyline.c0,polyline.c1{fill:none}
+.c0f{fill:var(--c0)}.c1f{fill:var(--c1)}.c2f{fill:var(--c2)}.c3f{fill:var(--c3)}.c4f{fill:var(--c4)}.c5f{fill:var(--muted)}
+.c0t{fill:var(--c0)}.c1t{fill:var(--c1)}.c2t{fill:var(--c2)}.c3t{fill:var(--c3)}.c4t{fill:var(--ink)}
+.slice{stroke:var(--sheet);stroke-width:1.5}
+.plot .edge{stroke:var(--muted);stroke-width:1.6}
+.plot .edge.hl{stroke:var(--ok);stroke-width:3.4}
+.plot .edge.dim{stroke-dasharray:3 3;opacity:.6}
+.plot .ew{fill:var(--c1);font-size:11px;font-weight:600}
+.plot .node{fill:var(--sheet);stroke:var(--navy);stroke-width:1.6}
+.plot .nl{fill:var(--ink);font-size:12px;font-weight:600}
+.plot .uni{fill:none;stroke:var(--muted)}
+.plot .ring{fill:none;stroke:var(--navy);stroke-width:1.6}
+.plot .shade{fill:var(--c1);fill-opacity:.45}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;margin-top:6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:14px;height:4px;border-radius:2px}
+.sw.c0f{background:var(--c0)}.sw.c1f{background:var(--c1)}.sw.c2f{background:var(--c2)}.sw.c3f{background:var(--c3)}
+.algos{display:flex;flex-wrap:wrap;gap:12px}
+.algos pre{margin:0;padding:10px 14px;border:1px solid var(--rule);border-radius:4px;background:var(--sheet);font:13px/1.45 var(--f-mono);overflow-x:auto;max-width:100%}
+.introbox{max-width:72ch;margin-top:18px}
+.introbox p{margin:10px 0}
+.introbox .lead{font-size:17.5px}
+.introbox h3{font:700 20px/1.2 var(--f-display);color:var(--navy);margin:26px 0 8px}
+.note{padding:12px 16px;background:var(--hint);color:var(--hint-ink);border-radius:4px;margin:16px 0;font-size:15px}
+.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.muted{color:var(--muted);font-size:14.5px}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:28px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px;margin-top:18px}
+.fcard{min-width:0;padding:14px 18px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+.fcard h3{margin:0 0 6px;font:700 19px/1.2 var(--f-display);color:var(--navy)}
+.fcard p{margin:6px 0;font-size:15px}
+.ft{border-collapse:collapse;font-size:13.5px;display:block;overflow-x:auto;max-width:100%}
+.ft td{border-bottom:1px solid var(--rule);padding:4px 8px;white-space:nowrap}
+.ft td:first-child{color:var(--muted)}
+.symbar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--sheet);border-top:2px solid var(--navy);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-block:8px calc(8px + env(safe-area-inset-bottom,0px))}
+.symin{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.symlbl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;background:none;border:0;cursor:pointer;padding:4px}
+#syms{display:flex;gap:4px;overflow-x:auto;min-width:0}
+#syms button{flex:0 0 auto;min-width:36px;height:34px;border:1px solid var(--rule);background:var(--paper);border-radius:5px;font:16px/1 var(--f-mono);cursor:pointer}
+#syms button:hover{border-color:var(--navy);background:var(--tint)}
+.symbar.min #syms{display:none}
+@media (max-width:860px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:14px;padding-top:12px}
+  .toc{position:static;flex-direction:row;overflow-x:auto;max-height:none;gap:6px;padding-bottom:4px}
+  .toc-i{grid-template-columns:auto auto;grid-template-areas:"n t";flex:0 0 auto;border:1px solid var(--rule);background:var(--sheet)}
+  .tc,.tp{display:none}
+  .bar{width:80px}
+}
+@media (max-width:560px){
+  .parts,.qact,.hint,.sol{margin-left:0}
+  .prow{grid-template-columns:minmax(0,1fr) 22px}
+  .plabel{grid-column:1/-1}
+  .ans,.ans.wide{max-width:none}
+  .brand span{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+<header class="top"><div class="top-in">
+  <div class="brand"><b>MATH1179</b><span>Tài liệu ôn tập · Mathematics for Computer Science</span></div>
+  <div class="ov"><span class="bar" id="ovbar"><i></i></span><span id="ovtxt"></span></div>
+  <button type="button" class="btn ghost" id="reset">Xóa tiến độ</button>
+  <div class="resetbox" id="resetbox" hidden>Xóa mọi câu trả lời? <button type="button" class="sm" id="resetyes">Xóa</button><button type="button" class="sm" id="resetno">Giữ lại</button></div>
+</div></header>
+<div class="layout">
+  <nav class="toc" id="toc" aria-label="Chương"></nav>
+  <main id="main"></main>
+</div>
+<div class="symbar" id="symbar"><div class="symin"><button type="button" class="symlbl" id="symtoggle" aria-expanded="true">Ký hiệu</button><div id="syms"></div></div></div>
+<script>
+/* ===== Engine: parsers + checkers (pure, testable in node) ===== */
+var SUP = {'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+function normMath(s){
+  s = String(s).trim();
+  s = s.replace(/[−–]/g,'-').replace(/[×·✕]/g,'*').replace(/÷/g,'/').replace(/π/g,'pi').replace(/√/g,'sqrt ');
+  s = s.replace(/([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+)/g, function(m){ return '^(' + m.split('').map(function(c){return SUP[c];}).join('') + ')'; });
+  return s;
+}
+var FUNCS = {sqrt:Math.sqrt, sin:Math.sin, cos:Math.cos, tan:Math.tan, ln:Math.log, log:Math.log10, log2:Math.log2, log10:Math.log10, abs:Math.abs, exp:Math.exp};
+function tokenize(s){
+  var t = [], i = 0, m;
+  while (i < s.length){
+    var c = s[i];
+    if (/\s/.test(c)){ i++; continue; }
+    if ((m = /^(\d+\.?\d*|\.\d+)/.exec(s.slice(i)))){ t.push({k:'n', v:parseFloat(m[1])}); i += m[1].length; continue; }
+    if ((m = /^[A-Za-z_][A-Za-z_0-9]*/.exec(s.slice(i)))){ t.push({k:'id', v:m[0]}); i += m[0].length; continue; }
+    if ('+-*/^()'.indexOf(c) >= 0){ t.push({k:c}); i++; continue; }
+    throw new Error('Ký tự không hợp lệ: ' + c);
+  }
+  return t;
+}
+function evalExpr(str, vars){
+  vars = vars || {};
+  var s = normMath(str);
+  /* scientific notation like 4.62e16 or 4.62E-3 */
+  s = s.replace(/(\d)\s*[eE]\s*([+-]?\d+)/g, '$1*10^($2)');
+  var t = tokenize(s), p = 0;
+  function peek(){ return t[p]; }
+  function startsAtom(tk){ return tk && (tk.k==='n' || tk.k==='id' || tk.k==='('); }
+  function expr(){ var v = term(); while (peek() && (peek().k==='+'||peek().k==='-')){ var o=t[p++].k; var r=term(); v = o==='+'? v+r : v-r; } return v; }
+  function term(){ var v = unary(); for(;;){ var tk = peek(); if (tk && (tk.k==='*'||tk.k==='/')){ p++; var r = unary(); v = tk.k==='*'? v*r : v/r; } else if (startsAtom(tk)){ v = v*power(); } else break; } return v; }
+  function unary(){ var tk = peek(); if (tk && (tk.k==='-'||tk.k==='+')){ p++; var v = unary(); return tk.k==='-'? -v : v; } return power(); }
+  function power(){ var b = atom(); if (peek() && peek().k==='^'){ p++; var e = unary(); return Math.pow(b, e); } return b; }
+  function atom(){
+    var tk = t[p++];
+    if (!tk) throw new Error('Biểu thức chưa đầy đủ');
+    if (tk.k==='n') return tk.v;
+    if (tk.k==='('){ var v = expr(); if (!peek() || peek().k!==')') throw new Error('Thiếu dấu )'); p++; return v; }
+    if (tk.k==='id'){
+      var id = tk.v;
+      if (id==='pi') return Math.PI;
+      if (FUNCS[id]){ var a = (peek() && peek().k==='(') ? atom() : power(); return FUNCS[id](a); }
+      if (Object.prototype.hasOwnProperty.call(vars, id)) return vars[id];
+      var prod = 1;
+      for (var i=0;i<id.length;i++){ var ch = id[i]; if (!Object.prototype.hasOwnProperty.call(vars, ch)) throw new Error('Không hiểu ký hiệu "' + id + '"'); prod *= vars[ch]; }
+      return prod;
+    }
+    throw new Error('Cú pháp chưa đúng');
+  }
+  var v = expr();
+  if (p < t.length) throw new Error('Cú pháp chưa đúng gần "' + (t[p].v || t[p].k) + '"');
+  return v;
+}
+/* Parse a numeric answer typed by a student */
+function parseNum(input){
+  var s = String(input).trim();
+  s = s.replace(/^[a-zA-Z]\s*=\s*/, '').replace(/^[≈~]\s*/, '');
+  s = s.replace(/\b(cm|mm|m)[²³]/g,'').replace(/[£$€%°]/g,'').replace(/\b(recurring|rad|radians|degrees|deg|minutes|mins|min|hours|hrs|h|cm|m|kg|people|người|phút|giờ|độ|litres|liters)\b\.?/gi,'').trim();
+  s = s.replace(/\.{2,}$/,'').replace(/̇|̅/g,'');
+  if (/^-?\d{1,3}([, ]\d{3})+(\.\d+)?$/.test(s)) s = s.replace(/[, ]/g,'');
+  var m = /^(-?)(\d+)\s+(\d+)\s*\/\s*(\d+)$/.exec(s);
+  if (m){ var v = +m[2] + (+m[3])/(+m[4]); return m[1] ? -v : v; }
+  s = s.replace(/(\d)\s*[xX]\s*(10)/g, '$1*$2');
+  return evalExpr(s, {});
+}
+function close(a, b, tol){ if (tol == null) tol = 1e-9; return Math.abs(a-b) <= Math.max(tol, 1e-9*Math.abs(b)); }
+function low(s){ return String(s).toLowerCase().replace(/[‘’`´]/g,"'").replace(/[“”]/g,'"').replace(/[−–]/g,'-').replace(/\s+/g,'').replace(/′/g,"'"); }
+var NONE_RE = /^(none|no|noreal|norealroots?|norealsolutions?|nosolution|vônghiệm|vonghiem|khôngcó|không|empty|∅|\{\}|φ|ø)$/;
+var IMPOSSIBLE_RE = /(khôngthựchiện|khongthuchien|impossible|notpossible|undefined|cannot|can't|khôngthể|khongthe|kxđ|n\/a|error|lỗi|#num|#value|không xác định|khôngxácđịnh|notdefined)/;
+var INF_RE = /^(∞|inf|infinite|infinity|vôhạn|vohan|ℵ0|ℵ₀|aleph0|countablyinfinite)$/;
+
+function splitList(s){
+  s = String(s).trim().replace(/^\{|\}$/g,'').trim();
+  if (!s) return [];
+  var parts = s.indexOf(',')>=0 ? s.split(',') : (s.indexOf(';')>=0 ? s.split(';') : s.split(/\s+/));
+  return parts.map(function(x){ return x.trim().replace(/^['"]|['"]$/g,''); }).filter(function(x){ return x.length; });
+}
+function parseSet(s){ s = String(s).replace(/\s+(and|và|&)\s+/gi, ', '); var L = low(s); if (NONE_RE.test(L)) return []; return splitList(String(s)).map(function(x){ return low(x); }); }
+function sameSet(a, b){
+  var A = {}, B = {}; a.forEach(function(x){A[x]=1;}); b.forEach(function(x){B[x]=1;});
+  var ka = Object.keys(A), kb = Object.keys(B); if (ka.length !== kb.length) return false;
+  return ka.every(function(k){ return B[k]; });
+}
+function parseTuples(s){
+  var out = [], re = /\(([^()]*)\)/g, m;
+  while ((m = re.exec(String(s)))) out.push(m[1].split(',').map(function(x){ return low(x); }).join(','));
+  return out;
+}
+function parseNumList(s){
+  var L = low(s); if (NONE_RE.test(L)) return [];
+  var str = String(s).replace(/[a-zA-Z]\s*=\s*/g,'').replace(/\band\b|\bvà\b|\bor\b/gi, ',').replace(/±/g,'±');
+  return str.split(/[,;]/).map(function(x){ return x.trim(); }).filter(Boolean).map(parseNum);
+}
+function parseMatrix(s){
+  var str = String(s).trim();
+  var rows;
+  if (/[;\n]/.test(str)) rows = str.split(/[;\n]/);
+  else if (/\]\s*,?\s*\[/.test(str)) rows = str.split(/\]\s*,?\s*\[/);
+  else rows = [str];
+  rows = rows.map(function(r){ return r.replace(/[\[\]()]/g,' ').trim(); }).filter(Boolean);
+  return rows.map(function(r){ var cells = r.indexOf(',')>=0 ? r.split(',') : r.split(/\s+/); return cells.map(function(c){ return c.trim(); }).filter(Boolean).map(parseNum); });
+}
+function parseVecList(s){
+  var out = [], re = /\(([^()]*)\)/g, m;
+  while ((m = re.exec(String(s)))) out.push(m[1].split(',').map(function(x){ return parseNum(x); }));
+  return out;
+}
+/* ---- Boolean logic ---- */
+function evalBool(str, env){
+  var s = String(str).replace(/<->|<=>|↔|⇔|\biff\b/gi,'↔').replace(/->|=>|⇒|→/g,'→')
+    .replace(/\bxor\b|⊕|⊻/gi,'⊕').replace(/\band\b|∧|&&?|\^|\*|·|\./gi,'∧').replace(/\bor\b|∨|\|\|?|\+/gi,'∨').replace(/\bnot\b|¬|~|!/gi,'¬');
+  var t = [], i = 0;
+  while (i < s.length){
+    var c = s[i];
+    if (/\s/.test(c)){ i++; continue; }
+    if ('∧∨¬→↔⊕()\''.indexOf(c) >= 0 || c === '′'){ t.push(c === '′' ? "'" : c); i++; continue; }
+    if (c === 'v' && !('v' in env)){ t.push('∨'); i++; continue; }
+    if (/[A-Za-z]/.test(c)){ t.push({v:c}); i++; continue; }
+    if (c==='T'||c==='1'){ t.push({c:true}); i++; continue; }
+    if (c==='0'){ t.push({c:false}); i++; continue; }
+    throw new Error('Ký hiệu không hợp lệ: ' + c);
+  }
+  var p = 0;
+  function pk(){ return t[p]; }
+  function iff(){ var a = imp(); while (pk()==='↔'){ p++; var b = imp(); a = (a===b); } return a; }
+  function imp(){ var a = or(); if (pk()==='→'){ p++; var b = imp(); return (!a) || b; } return a; }
+  function or(){ var a = xor(); while (pk()==='∨'){ p++; var b = xor(); a = a || b; } return a; }
+  function xor(){ var a = and(); while (pk()==='⊕'){ p++; var b = and(); a = a !== b; } return a; }
+  function and(){ var a = not(); for(;;){ if (pk()==='∧'){ p++; a = not() && a; } else if (pk() && (pk().v || pk()==='(' || pk()==='¬')){ a = not() && a; } else break; } return a; }
+  function not(){ if (pk()==='¬'){ p++; return !not(); } var v = prim(); while (pk()==="'"){ p++; v = !v; } return v; }
+  function prim(){
+    var tk = t[p++];
+    if (tk === '('){ var v = iff(); if (t[p] !== ')') throw new Error('Thiếu dấu )'); p++; return v; }
+    if (tk && tk.v){ if (!(tk.v in env)) throw new Error('Biến lạ: ' + tk.v); return env[tk.v]; }
+    if (tk && 'c' in tk) return tk.c;
+    throw new Error('Cú pháp chưa đúng');
+  }
+  var r = iff(); if (p < t.length) throw new Error('Cú pháp chưa đúng'); return r;
+}
+function boolEquiv(a, b, vars){
+  var n = vars.length;
+  for (var m = 0; m < (1<<n); m++){
+    var env = {}; vars.forEach(function(v, i){ env[v] = !((m >> (n-1-i)) & 1); });
+    if (evalBool(a, env) !== evalBool(b, env)) return false;
+  }
+  return true;
+}
+function TFrows(vars){
+  var n = vars.length, rows = [];
+  for (var m = 0; m < (1<<n); m++){ var env = {}; vars.forEach(function(v, i){ env[v] = !((m >> (n-1-i)) & 1); }); rows.push(env); }
+  return rows;
+}
+/* ---- graph helpers ---- */
+function parseEdges(s){
+  var out = [], str = String(s).toLowerCase();
+  var re = /\(?\s*([a-z0-9]+)\s*[,\- ]\s*([a-z0-9]+)\s*\)?/g, m;
+  var chunks = str.split(/[;\n]|\)\s*,?\s*\(|,(?=\s*\()/);
+  chunks.forEach(function(ch){ ch = ch.replace(/[(){}]/g,' ').trim(); if (!ch) return;
+    var mm = /^([a-z0-9]+)\s*[,\- ]?\s*([a-z0-9]+)$/.exec(ch.replace(/\s+/g,' ').replace(/ ?, ?/,','));
+    if (mm) out.push([mm[1], mm[2]]);
+    else if (/^[a-z]{2}$/.test(ch)) out.push([ch[0], ch[1]]);
+    else { ch.split(/[\s,]+/).forEach(function(tok){ if (/^[a-z]{2}$/.test(tok)) out.push([tok[0], tok[1]]); else if (tok) throw new Error('Không đọc được cạnh "' + tok + '"'); }); }
+  });
+  return out;
+}
+function ekey(a, b){ return a < b ? a + b : b + a; }
+function connectedCount(verts, edges){
+  var parent = {}; verts.forEach(function(v){ parent[v] = v; });
+  function f(x){ while (parent[x] !== x) x = parent[x] = parent[parent[x]]; return x; }
+  var cyc = false;
+  edges.forEach(function(e){ var a = f(e[0]), b = f(e[1]); if (a === b) cyc = true; else parent[a] = b; });
+  var roots = {}; verts.forEach(function(v){ roots[f(v)] = 1; });
+  return {parts: Object.keys(roots).length, cycle: cyc};
+}
+function parseWalk(s){ return String(s).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean); }
+
+/* ---- main checker ---- */
+function checkPart(part, input){
+  var raw = (input == null ? '' : String(input));
+  if (part.t === 'open') return {ok:null};
+  if (!raw.trim()) return {ok:false, empty:true, msg:'Chưa có câu trả lời.'};
+  try {
+    var L = low(raw);
+    if (part.impossible){ return IMPOSSIBLE_RE.test(L) ? {ok:true} : {ok:false, msg:'Hãy kiểm tra lại kích thước (cỡ) của hai ma trận.'}; }
+    switch (part.t){
+      case 'num': {
+        if (part.inf) return {ok: INF_RE.test(L)};
+        if (part.err && IMPOSSIBLE_RE.test(L)) return {ok:true};
+        if (part.form === 'frac' && !/\//.test(raw)) return {ok:false, msg:'Đề yêu cầu viết dạng phân số (có dấu /).'};
+        if (part.form === 'dec' && /\//.test(raw)) return {ok:false, msg:'Đề yêu cầu viết dạng số thập phân.'};
+        if (part.form === 'plain' && /[eE^×x*]|10\s*\^/.test(raw.replace(/\.\.\./,''))) return {ok:false, msg:'Hãy viết số đầy đủ, không dùng lũy thừa của 10.'};
+        if (part.form === 'sci'){
+          var mm = /^\s*(-?\d(?:\.\d+)?)\s*(?:[×x*]\s*10\s*(?:\^\s*\(?\s*([+\-−]?\d+)\s*\)?|([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+))|[eE]\s*([+\-]?\d+))\s*$/.exec(raw.replace(/−/g,'-'));
+          if (!mm) return {ok:false, msg:'Dạng chuẩn là a × 10^n với 1 ≤ a < 10, ví dụ 3.8762 × 10^2.'};
+        }
+        if (part.dp != null){ var dps = (raw.trim().split('.')[1] || ''); if (dps.replace(/\D/g,'').length !== part.dp) return {ok:false, msg:'Cần đúng ' + part.dp + ' chữ số sau dấu thập phân.'}; }
+        var v = parseNum(raw);
+        if (!isFinite(v)) return {ok:false, msg:'Không đọc được số.'};
+        return {ok: close(v, part.a, part.tol)};
+      }
+      case 'str': {
+        var acc = (part.a || []).map(low);
+        if (acc.indexOf(L) >= 0) return {ok:true};
+        if (part.re && part.re.some(function(r){ return new RegExp(r, 'i').test(raw.trim()); })) return {ok:true};
+        return {ok:false};
+      }
+      case 'set': {
+        if (part.inf) return {ok: INF_RE.test(L)};
+        var got = parseSet(raw), exp = part.a.map(function(x){ return low(x); });
+        if (part.numeric){ got = got.map(function(x){ return String(parseNum(x)); }); exp = exp.map(function(x){ return String(parseNum(x)); }); }
+        return {ok: sameSet(got, exp), msg: got.length !== exp.length ? ('Bạn liệt kê ' + got.length + ' phần tử, đáp án có ' + exp.length + '.') : null};
+      }
+      case 'pairs': { var g = parseTuples(raw), e = part.a.map(function(x){ return parseTuples(x)[0]; }); return {ok: sameSet(g, e), msg: g.length !== e.length ? ('Bạn có ' + g.length + ' cặp, cần ' + e.length + ' cặp.') : null}; }
+      case 'roots': {
+        var r = parseNumList(raw), ex = part.a.slice();
+        if (!ex.length) return {ok: r.length === 0 || NONE_RE.test(L) || /noreal|vônghiệm|không có nghiệm thực/.test(L)};
+        var uniq = []; r.forEach(function(x){ if (!uniq.some(function(y){ return close(x, y, part.tol); })) uniq.push(x); });
+        if (uniq.length !== ex.length) return {ok:false, msg:'Số nghiệm chưa đúng (cần ' + ex.length + ').'};
+        return {ok: ex.every(function(x){ return uniq.some(function(y){ return close(x, y, part.tol); }); })};
+      }
+      case 'vec': {
+        var u = parseNumList(raw.replace(/[()\[\]]/g,'')); if (u.length !== part.a.length) return {ok:false, msg:'Cần ' + part.a.length + ' thành phần.'};
+        return {ok: part.a.every(function(x, i){ return close(u[i], x, part.tol); })};
+      }
+      case 'pts': {
+        var P = parseVecList(raw); if (P.length !== part.a.length) return {ok:false, msg:'Cần ' + part.a.length + ' điểm theo thứ tự P, Q, R, S.'};
+        return {ok: part.a.every(function(pt, i){ return close(P[i][0], pt[0]) && close(P[i][1], pt[1]); })};
+      }
+      case 'matrix': {
+        var M = parseMatrix(raw), E = part.a;
+        if (M.length !== E.length || M.some(function(row, i){ return row.length !== E[i].length; })) return {ok:false, msg:'Kích thước chưa đúng: đáp án là ma trận ' + E.length + '×' + E[0].length + '.'};
+        return {ok: E.every(function(row, i){ return row.every(function(x, j){ return close(M[i][j], x, 1e-6); }); })};
+      }
+      case 'logic': {
+        var expr = raw.replace(/^.*?(=|≡)\s*/, function(m0){ return /^[^=≡]*[a-z]\s*$/i.test(m0.slice(0,-1).trim()) && m0.trim().length < 4 ? '' : m0; });
+        return {ok: boolEquiv(expr, part.a, part.vars)};
+      }
+      case 'formula': {
+        var ex2 = raw.replace(/^\s*[A-Za-z]\s*=\s*/, '');
+        var pts = part.at || [];
+        for (var k = 0; k < pts.length; k++){ var env = pts[k]; var gv = evalExpr(ex2, env), ev = part.f(env); if (!close(gv, ev, 1e-6)) return {ok:false}; }
+        return {ok:true};
+      }
+      case 'tf': case 'choice': return {ok: String(raw) === String(part.a)};
+      case 'fn': return part.f(raw);
+      case 'grid': return {ok:null};
+    }
+  } catch (err){ return {ok:false, msg: err.message || 'Không đọc được câu trả lời.'}; }
+  return {ok:false};
+}
+if (typeof module !== 'undefined') module.exports = {checkPart:checkPart, evalExpr:evalExpr, evalBool:evalBool, boolEquiv:boolEquiv, TFrows:TFrows, parseNum:parseNum, parseEdges:parseEdges, connectedCount:connectedCount, parseWalk:parseWalk, ekey:ekey, low:low};
+/* ===== SVG helpers for worked solutions (pure string builders) ===== */
+var G = (function(){
+  function fmt(n){ return Math.round(n*100)/100; }
+  function niceStep(span){ var raw = span/8, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw/p; return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p; }
+  function plot(o){
+    var W = o.w || 360, H = o.h || 240, pad = 30;
+    var x0 = o.xr[0], x1 = o.xr[1], y0 = o.yr[0], y1 = o.yr[1];
+    function X(x){ return pad + (x - x0) / (x1 - x0) * (W - pad - 10); }
+    function Y(y){ return H - pad - (y - y0) / (y1 - y0) * (H - pad - 10); }
+    var s = '<svg class="plot" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + (o.label || 'Đồ thị') + '">';
+    var sx = o.xs || niceStep(x1 - x0), sy = o.ys || niceStep(y1 - y0);
+    for (var gx = Math.ceil(x0/sx)*sx; gx <= x1 + 1e-9; gx += sx){ s += '<line class="g" x1="' + X(gx) + '" y1="' + Y(y0) + '" x2="' + X(gx) + '" y2="' + Y(y1) + '"/>'; s += '<text class="tk" x="' + X(gx) + '" y="' + (H - pad + 13) + '" text-anchor="middle">' + (o.xfmt ? o.xfmt(gx) : fmt(gx)) + '</text>'; }
+    for (var gy = Math.ceil(y0/sy)*sy; gy <= y1 + 1e-9; gy += sy){ s += '<line class="g" x1="' + X(x0) + '" y1="' + Y(gy) + '" x2="' + X(x1) + '" y2="' + Y(gy) + '"/>'; s += '<text class="tk" x="' + (pad - 4) + '" y="' + (Y(gy) + 3) + '" text-anchor="end">' + fmt(gy) + '</text>'; }
+    if (x0 <= 0 && x1 >= 0) s += '<line class="ax" x1="' + X(0) + '" y1="' + Y(y0) + '" x2="' + X(0) + '" y2="' + Y(y1) + '"/>';
+    if (y0 <= 0 && y1 >= 0) s += '<line class="ax" x1="' + X(x0) + '" y1="' + Y(0) + '" x2="' + X(x1) + '" y2="' + Y(0) + '"/>';
+    (o.polys || []).forEach(function(pg, i){ s += '<polygon class="poly c' + (pg.c != null ? pg.c : i) + '" points="' + pg.p.map(function(q){ return X(q[0]) + ',' + Y(q[1]); }).join(' ') + '"/>'; if (pg.t) s += '<text class="lbl c' + (pg.c != null ? pg.c : i) + 't" x="' + X(pg.p[0][0]) + '" y="' + (Y(pg.p[0][1]) + 13) + '">' + pg.t + '</text>'; });
+    (o.bars || []).forEach(function(b){ var bw = (W - pad - 10) / (x1 - x0) * (b.w || 1) * 0.92; s += '<rect class="bar" x="' + (X(b.x) - bw/2) + '" y="' + Y(b.y) + '" width="' + bw + '" height="' + (Y(0) - Y(b.y)) + '"/>'; });
+    (o.fns || []).forEach(function(fn, i){
+      var d = '', pen = false, n = 240;
+      for (var k = 0; k <= n; k++){ var x = x0 + (x1 - x0) * k / n, y = fn.f(x);
+        if (!isFinite(y) || y < y0 - (y1-y0) || y > y1 + (y1-y0)){ pen = false; continue; }
+        var yy = Math.max(y0 - (y1-y0)*0.05, Math.min(y1 + (y1-y0)*0.05, y));
+        d += (pen ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(yy).toFixed(1); pen = true; }
+      s += '<path class="fn c' + (fn.c != null ? fn.c : i) + '" d="' + d + '"/>';
+    });
+    (o.lines || []).forEach(function(ln, i){ s += '<polyline class="fn c' + (ln.c != null ? ln.c : i) + '" points="' + ln.p.map(function(q){ return X(q[0]) + ',' + Y(q[1]); }).join(' ') + '"/>'; if (ln.dots) ln.p.forEach(function(q){ s += '<circle class="dot c' + (ln.c != null ? ln.c : i) + 'f" cx="' + X(q[0]) + '" cy="' + Y(q[1]) + '" r="2.8"/>'; }); });
+    (o.pts || []).forEach(function(q){ s += '<circle class="dot c0f" cx="' + X(q[0]) + '" cy="' + Y(q[1]) + '" r="3.2"/>'; });
+    if (o.xl) s += '<text class="tk" x="' + (W - 10) + '" y="' + (H - 4) + '" text-anchor="end">' + o.xl + '</text>';
+    if (o.yl) s += '<text class="tk" x="4" y="10">' + o.yl + '</text>';
+    return s + '</svg>';
+  }
+  function legend(items){ return '<div class="legend">' + items.map(function(t, i){ return '<span><i class="sw c' + i + 'f"></i>' + t + '</span>'; }).join('') + '</div>'; }
+  function bars(labels, vals, o){
+    o = o || {}; var W = 360, H = 220, pad = 30, n = labels.length, max = o.max || Math.max.apply(null, vals) * 1.15;
+    var bw = (W - pad - 10) / n, s = '<svg class="plot" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Biểu đồ cột">';
+    var st = niceStep(max);
+    for (var g = 0; g <= max; g += st){ var y = H - pad - g / max * (H - pad - 10); s += '<line class="g" x1="' + pad + '" y1="' + y + '" x2="' + (W - 10) + '" y2="' + y + '"/><text class="tk" x="' + (pad - 4) + '" y="' + (y + 3) + '" text-anchor="end">' + fmt(g) + '</text>'; }
+    vals.forEach(function(v, i){ var h = v / max * (H - pad - 10), x = pad + i * bw + bw * 0.15; s += '<rect class="bar" x="' + x + '" y="' + (H - pad - h) + '" width="' + (bw * 0.7) + '" height="' + h + '"/><text class="tk" x="' + (x + bw * 0.35) + '" y="' + (H - pad + 13) + '" text-anchor="middle">' + labels[i] + '</text><text class="vl" x="' + (x + bw * 0.35) + '" y="' + (H - pad - h - 4) + '" text-anchor="middle">' + v + '</text>'; });
+    return s + '<line class="ax" x1="' + pad + '" y1="' + (H - pad) + '" x2="' + (W - 10) + '" y2="' + (H - pad) + '"/></svg>';
+  }
+  function pie(labels, vals){
+    var W = 360, H = 220, cx = 110, cy = 110, r = 95, tot = vals.reduce(function(a, b){ return a + b; }, 0), a0 = -Math.PI/2, s = '<svg class="plot" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Biểu đồ tròn">';
+    vals.forEach(function(v, i){ var a1 = a0 + v / tot * 2 * Math.PI, large = (a1 - a0) > Math.PI ? 1 : 0;
+      s += '<path class="slice c' + i + 'f" d="M' + cx + ' ' + cy + ' L' + (cx + r*Math.cos(a0)) + ' ' + (cy + r*Math.sin(a0)) + ' A' + r + ' ' + r + ' 0 ' + large + ' 1 ' + (cx + r*Math.cos(a1)) + ' ' + (cy + r*Math.sin(a1)) + ' Z"/>';
+      s += '<rect class="c' + i + 'f" x="225" y="' + (22 + i * 24) + '" width="11" height="11" rx="2"/><text class="tk2" x="242" y="' + (32 + i * 24) + '">' + labels[i] + ' ' + fmt(v / tot * 100) + '%</text>';
+      a0 = a1; });
+    return s + '</svg>';
+  }
+  function graph(nodes, edges, o){
+    o = o || {}; var W = o.w || 300, H = o.h || 220, hl = {}; (o.hl || []).forEach(function(k){ hl[k] = 1; });
+    var s = '<svg class="plot" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Đồ thị">';
+    edges.forEach(function(e){ var a = nodes[e[0]], b = nodes[e[1]], k = e[0] < e[1] ? e[0] + e[1] : e[1] + e[0];
+      s += '<line class="edge' + (hl[k] ? ' hl' : (o.hl ? ' dim' : '')) + '" x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '"/>';
+      if (e[2] != null) s += '<text class="ew" x="' + ((a[0] + b[0]) / 2 + 4) + '" y="' + ((a[1] + b[1]) / 2 - 4) + '">' + e[2] + '</text>'; });
+    Object.keys(nodes).forEach(function(k){ var p = nodes[k]; s += '<circle class="node" cx="' + p[0] + '" cy="' + p[1] + '" r="12"/><text class="nl" x="' + p[0] + '" y="' + (p[1] + 4) + '" text-anchor="middle">' + k + '</text>'; });
+    return s + '</svg>';
+  }
+  function tree(t, root, o){
+    o = o || {}; var pos = {}, depth = 0, order = 0;
+    (function walk(n, d){ if (n == null) return; walk(t[n][0], d + 1); pos[n] = [order++, d]; depth = Math.max(depth, d); walk(t[n][1], d + 1); })(root, 0);
+    var W = Math.max(300, order * (o.gap || 46) + 20), H = (depth + 1) * 54 + 16, s = '<svg class="plot" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Cây nhị phân">';
+    function P(n){ return [20 + pos[n][0] * (W - 40) / Math.max(1, order - 1), 24 + pos[n][1] * 54]; }
+    Object.keys(t).forEach(function(n){ t[n].forEach(function(c){ if (c != null){ var a = P(n), b = P(c); s += '<line class="edge" x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '"/>'; } }); });
+    Object.keys(t).forEach(function(n){ var p = P(n), wd = Math.max(26, String(n).length * 7 + 12); s += '<rect class="node" x="' + (p[0] - wd/2) + '" y="' + (p[1] - 11) + '" width="' + wd + '" height="22" rx="11"/><text class="nl" x="' + p[0] + '" y="' + (p[1] + 4) + '" text-anchor="middle">' + n + '</text>'; });
+    return '<div class="scroll">' + s + '</svg></div>';
+  }
+  function venn(region){
+    var id = 'v' + Math.random().toString(36).slice(2, 7);
+    var s = '<svg class="plot venn" viewBox="0 0 260 150" role="img" aria-label="Biểu đồ Venn"><defs><clipPath id="' + id + 'a"><circle cx="105" cy="78" r="48"/></clipPath><clipPath id="' + id + 'b"><circle cx="155" cy="78" r="48"/></clipPath></defs>';
+    s += '<rect class="uni" x="6" y="6" width="248" height="138" rx="4"/>';
+    if (region === 'B') s += '<circle class="shade" cx="155" cy="78" r="48"/>';
+    if (region === 'AuB') s += '<circle class="shade" cx="105" cy="78" r="48"/><circle class="shade" cx="155" cy="78" r="48"/>';
+    if (region === 'AnB') s += '<circle class="shade" cx="155" cy="78" r="48" clip-path="url(#' + id + 'a)"/>';
+    s += '<circle class="ring" cx="105" cy="78" r="48"/><circle class="ring" cx="155" cy="78" r="48"/><text class="nl" x="70" y="34">A</text><text class="nl" x="186" y="34">B</text><text class="tk" x="14" y="20">U</text>';
+    return s + '</svg>';
+  }
+  return {plot:plot, legend:legend, bars:bars, pie:pie, graph:graph, tree:tree, venn:venn};
+})();
+if (typeof module !== 'undefined') module.exports.G = G;
+/* ===== Part constructors ===== */
+function N(l, a, s, o){ return Object.assign({t:'num', l:l, a:a, s:(s != null ? s : String(a))}, o || {}); }
+function S(l, a, s, o){ return Object.assign({t:'set', l:l, a:a.map(String), s:(s || ('{' + a.join(', ') + '}'))}, o || {}); }
+function X(l, acc, s, o){ return Object.assign({t:'str', l:l, a:acc, s:(s || acc[0])}, o || {}); }
+function TF(l, b, s){ return {t:'tf', l:l, a:(b ? 'T' : 'F'), s:(s || (b ? 'True' : 'False'))}; }
+function CHO(l, opts, i){ return {t:'choice', l:l, opts:opts, a:String(i), s:opts[i]}; }
+function O(l, model, ph){ return {t:'open', l:l, s:model, ph:ph}; }
+function LG(l, e, vars, s){ return {t:'logic', l:l, a:e, vars:vars, s:(s || e), ph:'VD: ¬p ∧ q'}; }
+function FM(l, f, vars, s, ph){
+  var at = [];
+  for (var i = 0; i < 4; i++){ var env = {}; vars.forEach(function(v, j){ env[v] = 1.37 + i * 2.91 + j * 0.53 + (v === 'S' || v === 'M' ? 4e5 + i * 1234.5 : 0) + (v === 'W' ? 300 + i * 17 : 0) + (v === 'H' ? 41 + i * 3 : 0); }); at.push(env); }
+  return {t:'formula', l:l, f:f, at:at, s:s, ph:(ph || 'Nhập công thức')};
+}
+function MX(l, a, s){ return {t:'matrix', l:l, a:a, s:s, ph:'VD: 1 2; 3 4'}; }
+function IMP(l){ return {t:'str', impossible:true, l:l, s:'Không thực hiện được', ph:'Kết quả hoặc "impossible"'}; }
+function RT(l, a, s, tol, ph){ return {t:'roots', l:l, a:a, s:s, tol:tol, ph:(ph || 'Các nghiệm, cách nhau bởi dấu phẩy')}; }
+function PR(l, a, s){ return {t:'pairs', l:l, a:a, s:(s || a.join(', ')), ph:'(a,b), (c,d), ...'}; }
+function FN(l, f, s, ph){ return {t:'fn', l:l, f:f, s:s, ph:ph}; }
+function GRID(l, head, rows, o){ return Object.assign({t:'grid', l:l, head:head, rows:rows}, o || {}); }
+var TACC = ['t','true','1','đ','đúng','d'], FACC = ['f','false','0','s','sai'];
+function TT(l, vars, cols){
+  var head = vars.concat(cols.map(function(c){ return c.h; }));
+  var rows = TFrows(vars).map(function(env){
+    return vars.map(function(v){ return env[v] ? 'T' : 'F'; }).concat(cols.map(function(c){ var v = evalBool(c.e, env); return {a:(v ? TACC : FACC), s:(v ? 'T' : 'F')}; }));
+  });
+  return GRID(l, head, rows, {tt:true});
+}
+function B(l, val, base){
+  return FN(l, function(raw){
+    var c = String(raw).toUpperCase().replace(/[₀-₉]|\(\d+\)|_\d+$/g, '').replace(/\s+/g, '');
+    var digits = '0123456789ABCDEF'.slice(0, base);
+    if (!c.length || c.split('').some(function(ch){ return digits.indexOf(ch) < 0; })) return {ok:false, msg:'Chỉ dùng các chữ số ' + (base === 16 ? '0-9 và A-F' : '0-' + (base - 1)) + '.'};
+    return {ok: parseInt(c, base) === val};
+  }, val.toString(base).toUpperCase(), 'Cơ số ' + base);
+}
+function BIND(l, exp, s){
+  return FN(l, function(raw){
+    var L = low(raw);
+    var isFail = /fail|nomatch|không|khong|cannot|impossible|×|✗/.test(L);
+    if (exp === 'fail') return {ok: isFail};
+    if (isFail) return {ok:false};
+    var map = {};
+    L.replace(/π/g, 'pi').split(/[,;]|and|và/).forEach(function(b){ var kv = b.split('='); if (kv.length === 2 && kv[0] !== kv[1]) map[kv[0]] = kv[1]; });
+    var ek = Object.keys(exp);
+    if (Object.keys(map).length !== ek.length) return {ok:false};
+    return {ok: ek.every(function(k){ return [].concat(exp[k]).indexOf(map[k]) >= 0; })};
+  }, s, 'VD: X = a, Y = b  hoặc  fail');
+}
+function NODE(name){ return name; }
+function WALK(l, edgesStr, from, to, len, s, mustBePath){
+  var E = {}; edgesStr.split(' ').forEach(function(e){ E[ekey(e[0], e[1])] = 1; });
+  return FN(l, function(raw){
+    var w = parseWalk(raw);
+    if (w[0] !== from || w[w.length - 1] !== to) return {ok:false, msg:'Walk phải bắt đầu tại ' + from + ' và kết thúc tại ' + to + '.'};
+    if (w.length - 1 !== len) return {ok:false, msg:'Độ dài walk = số cạnh = ' + (w.length - 1) + ', cần ' + len + '.'};
+    for (var i = 0; i < w.length - 1; i++) if (!E[ekey(w[i], w[i + 1])]) return {ok:false, msg:'Không có cạnh (' + w[i] + ',' + w[i + 1] + ').'};
+    return {ok:true};
+  }, s, 'VD: a, f, e');
+}
+var CH = [];
+/* ================= 1: SETS ================= */
+CH.push({no:1, title:'Sets', vi:'Tập hợp', qs:[
+{n:1, p:'Notation: explain in your own words and write down the notation for each item.',
+ hint:'Dùng bảng ký hiệu ở cuối trang để chèn ∅ ∪ ∩ ∈ ∉ ⊆ ⊂. Với "order of a set", nghĩ đến số phần tử của tập.',
+ parts:[X('a) Empty set', ['∅','{}','ø','φ'], '∅ hoặc { }'), X('b) Union', ['∪','a∪b'], '∪ (A ∪ B)'), X('c) Intersection', ['∩','a∩b'], '∩ (A ∩ B)'), X('d) Universal set', ['u','ξ','ℰ','ε'], 'U (hoặc ξ)'),
+  X('e) Complement of A', ["a'","'","ā","a^c","∁a","ac"], "A′"), X('f) Order of A', ['|a|','n(a)','#a','card(a)'], '|A|'), X('g) Is a member of', ['∈','x∈a'], '∈'), X('h) Is not a member of', ['∉','x∉a'], '∉'),
+  X('i) Subset', ['⊆','a⊆b'], '⊆'), X('j) Proper subset', ['⊂','a⊂b','⊊'], '⊂')],
+ sol:'<p>∅: tập không có phần tử nào. A ∪ B: phần tử thuộc A <em>hoặc</em> B. A ∩ B: thuộc <em>cả hai</em>. U: tập chứa mọi phần tử đang xét. A′: những phần tử của U không thuộc A. |A|: số phần tử của A. x ∈ A: x là phần tử của A, x ∉ A thì ngược lại. A ⊆ B: mọi phần tử của A đều thuộc B. A ⊂ B: A ⊆ B và A ≠ B.</p>'},
+{n:2, p:'Where U = {1, 2, 3, 4, 5, 6, 7, 8, 9}, A = {1, 3, 5, 6, 7} and B = {2, 3, 4, 7, 8}, find:',
+ hint:'Tìm A′ và B′ trước (lấy U bỏ đi các phần tử của tập đó), rồi ghép. Nhớ |X| là số phần tử, không phải bản thân tập.',
+ parts:[S('a) A′', [2,4,8,9]), S('b) A ∪ B', [1,2,3,4,5,6,7,8]), S('c) A ∪ B′', [1,3,5,6,7,9]), N('d) |B|', 5), N('e) |A′ ∪ B′|', 7), TF('f) Is 8 ∈ A′?', true, 'Yes'), TF('g) Is 11 ∈ A′?', false, 'No')],
+ sol:'<p>B′ = {1, 5, 6, 9}. A′ ∪ B′ = {1, 2, 4, 5, 6, 8, 9} nên |A′ ∪ B′| = 7 (kiểm tra bằng De Morgan: A′ ∪ B′ = (A ∩ B)′, mà A ∩ B = {3, 7}, nên 9 − 2 = 7). 11 không thuộc U nên cũng không thuộc A′.</p>'},
+{n:3, p:'U = {the letters of the alphabet}, A = {vowels} and B = {b, c, e, r, t, z}.',
+ hint:'A = {a, e, i, o, u}. Bảng chữ cái có 26 chữ.',
+ parts:[S('a) A ∪ B', ['a','b','c','e','i','o','r','t','u','z']), S('b) A \\ B', ['a','i','o','u']), N('c) |A′|', 21), N('d) |(A ∪ B)′|', 16)],
+ sol:'<p>|A ∪ B| = 5 + 6 − 1 = 10 (chữ e nằm ở cả hai). Vậy |A′| = 26 − 5 = 21 và |(A ∪ B)′| = 26 − 10 = 16.</p>'},
+{n:4, p:'U = {positive integers}, A = {prime numbers} and B = {odd numbers}.',
+ hint:'B′ là các số nguyên dương không lẻ. A \\ B′ là các số nguyên tố không chẵn.',
+ parts:[X('a) B′', ['even','evennumbers','{2,4,6,...}','{2,4,6,8,...}','sốchẵn'], '{2, 4, 6, ...} (even numbers)', {re:['^\\{?\\s*2\\s*,\\s*4\\s*,\\s*6','even','chẵn']}), N('b) |A \\ B′|', 0, '∞ (infinite)', {inf:true, ph:'Số phần tử'})],
+ sol:'<p>A \\ B′ = A ∩ B = các số nguyên tố lẻ {3, 5, 7, 11, ...}. Có vô hạn số nguyên tố, chỉ bỏ đi số 2, nên tập này vẫn vô hạn: |A \\ B′| = ∞.</p>'},
+{n:5, p:'Consider the sets A = {n : n ∈ N, 4 ≤ n &lt; 12}, B = set of positive numbers divisible by 3, C = {x : 2x = 6}, D = {1, 3, 5, ..., 11}, E = set of courses you are taking this year.',
+ hint:'A gồm số tự nhiên từ 4 đến 11 (không lấy 12). C chỉ có một phần tử. Với (iii), ⊆ cần MỌI phần tử của tập trái nằm trong tập phải.',
+ parts:[S('(i) A in full', [4,5,6,7,8,9,10,11]), X('(i) B in full', ['{3,6,9,...}','{3,6,9,12,...}'], '{3, 6, 9, 12, ...}', {re:['^\\{?\\s*3\\s*,\\s*6\\s*,\\s*9']}), S('(i) C in full', [3]), O('(i) E in full', 'Tùy chương trình của bạn, ví dụ {MATH1179, COMP1845, COMP1857, ...}'),
+  N('(ii) |A|', 8), N('(ii) |B|', 0, '∞', {inf:true}), N('(ii) |C|', 1), N('(ii) |D|', 6),
+  TF('(iii) 12 ∈ A', false), TF('(iii) 27 ∈ B', true), TF('(iii) 2 ∉ C', true), TF('(iii) {7, 9} ⊆ D', true), TF('(iii) C ⊆ A', false), TF('(iii) A ⊆ D', false), TF('(iii) C ⊆ B', true)],
+ sol:'<p>12 ∉ A vì điều kiện là n &lt; 12. C = {3} và 3 ∉ A nên C ⊄ A. A chứa 4 (chẵn) mà D chỉ gồm số lẻ nên A ⊄ D. 3 chia hết cho 3 nên C ⊆ B. "Logical Foundations ∈ E" đúng hay sai tùy môn bạn học.</p>'},
+{n:6, p:'U = {a, b, c, d, e, f, g}, P = {b, d}, Q = {c, d, e, f}. List the elements in each set.',
+ hint:'Viết sẵn P′ = U bỏ b, d và Q′ = U bỏ c, d, e, f. Ngoặc nào tính trước.',
+ parts:[S('P ∪ Q', ['b','c','d','e','f']), S('P ∩ Q', ['d']), S('P′', ['a','c','e','f','g']), S('Q′', ['a','b','g']), S('P ∩ Q′', ['b']), S('(P ∩ Q′)′', ['a','c','d','e','f','g']), S('P \\ Q', ['b']), S('Q \\ P', ['c','e','f']), S('Q ∪ P′', ['a','c','d','e','f','g']), S('P ∩ (Q ∪ P′)', ['d'])],
+ sol:'<p>Để ý P ∩ Q′ = P \\ Q = {b}. Theo De Morgan, (P ∩ Q′)′ = P′ ∪ Q = Q ∪ P′, nên hai đáp án đó giống nhau. Cuối cùng P ∩ (Q ∪ P′) = (P ∩ Q) ∪ (P ∩ P′) = P ∩ Q = {d}.</p>'},
+{n:7, p:'U = students in the University of Greenwich, S = students in the Faculty of Engineering and Science, B = students on BSc Computer Science, P = students who have an iPhone, A = students who live on the Avery Hill Campus.',
+ hint:'Sinh viên BSc Computer Science thuộc Faculty of Engineering and Science, nên B ⊆ S. "All X are Y" viết là X ⊆ Y; "No X are Y" viết là X ∩ Y = ∅.',
+ parts:[O('(i) B ∩ P', 'Sinh viên BSc Computer Science có iPhone.'), O('(i) S′', 'Sinh viên không thuộc Faculty of Engineering and Science.'), O('(i) S ∩ A', 'Sinh viên khoa Engineering and Science sống ở Avery Hill.'), O('(i) B ∩ A′', 'Sinh viên BSc Computer Science không sống ở Avery Hill.'), O('(i) (S ∪ A)′', 'Sinh viên không thuộc khoa Engineering and Science và cũng không sống ở Avery Hill.'), O('(i) S ∩ (B ∪ P)', 'Sinh viên khoa Engineering and Science học BSc Computer Science hoặc có iPhone (thực tế bằng B ∪ (S ∩ P) vì B ⊆ S).'),
+  TF('(ii) S ⊆ B', false), TF('(ii) B ⊆ S', true), TF('(ii) S ∩ B = B', true), TF("(ii) S′ ∩ P = ∅", false), TF('(ii) S ∪ B = S', true), TF('(ii) A ∪ P = U', false),
+  X('(iii) All students in the Faculty of Engineering and Science have iPhones', ['s⊆p','s⊂p','s∩p=s','p⊇s',"s∩p'=∅",'s\\p=∅'], 'S ⊆ P'), X('(iii) No students who live on Avery Hill do BSc Computer Science', ['a∩b=∅','b∩a=∅','a∩b={}','b∩a={}'], 'A ∩ B = ∅'),
+  X('(iv) No BSc Computer Science students live on Avery Hill (equation)', ['b∩a=∅','a∩b=∅','b∩a={}','a∩b={}'], 'B ∩ A = ∅'), X('(iv) All students live on Avery Hill (equation)', ['a=u','u=a',"a'=∅"], 'A = U')],
+ sol:'<p>(ii) Vì B ⊆ S nên S ∩ B = B và S ∪ B = S. S ⊆ B sai vì khoa còn nhiều ngành khác. S′ ∩ P = ∅ nghĩa là không ai ngoài khoa có iPhone, rõ ràng sai. A ∪ P = U nghĩa là ai cũng sống ở Avery Hill hoặc có iPhone, sai.</p>'},
+{n:8, p:'Draw Venn diagrams and deduce a simplified expression for (i) B ∩ (A ∪ B) and (ii) (A ∩ B′) ∪ B.',
+ hint:'Tô vùng A ∪ B, rồi giữ lại phần nằm trong B. Với (ii), A ∩ B′ là phần A ngoài B; ghép thêm cả B.',
+ parts:[X('(i) B ∩ (A ∪ B) =', ['b'], 'B'), X('(ii) (A ∩ B′) ∪ B =', ['a∪b','b∪a'], 'A ∪ B')],
+ sol:'<div class="figs"><figure>' + G.venn('B') + '<figcaption>(i) B ∩ (A ∪ B) = B (luật hấp thụ)</figcaption></figure><figure>' + G.venn('AuB') + '<figcaption>(ii) (A ∩ B′) ∪ B = A ∪ B</figcaption></figure></div><p>Đại số: (A ∩ B′) ∪ B = (A ∪ B) ∩ (B′ ∪ B) = (A ∪ B) ∩ U = A ∪ B.</p>'},
+{n:9, p:'In a class of 60 children 29 had blonde hair and 32 blue eyes. If 8 children had neither, how many had both? (use x for the unknown number). How many had blonde hair but not blue eyes?',
+ hint:'Số em có ít nhất một đặc điểm = 60 − 8. Dùng |A ∪ B| = |A| + |B| − |A ∩ B|.',
+ parts:[N('Both (x)', 9), N('Blonde but not blue eyes', 20)],
+ sol:'<p>|A ∪ B| = 60 − 8 = 52. 29 + 32 − x = 52 nên x = 9. Tóc vàng mà mắt không xanh: 29 − 9 = 20.</p>'},
+{n:10, p:'One week in September journeys to and from work of 100 staff were monitored. 95 recorded at least one journey by walking, car or train. 42 claimed to walk to work, 57 travelled by car and 43 took the train. Only 9 used all three methods, 31 used both walking and car and 14 car and train. Find the number of staff who travelled by walking and train but did not use a car.',
+ hint:'Công thức ba tập: |W ∪ C ∪ T| = |W| + |C| + |T| − |W∩C| − |C∩T| − |W∩T| + |W∩C∩T|. Ẩn là |W∩T|.',
+ parts:[N('|W ∩ T|', 11), N('Walk and train, no car', 2)],
+ sol:'<p>95 = 42 + 57 + 43 − 31 − 14 − x + 9 = 106 − x nên x = |W ∩ T| = 11. Trong 11 người đó có 9 người dùng cả ba, vậy đi bộ và tàu mà không đi xe: 11 − 9 = 2.</p>'},
+{n:11, p:'For the sets A = {Amy, Martin}, B = {Smith, Jones, John}, list A × B and B × A.',
+ hint:'A × B gồm mọi cặp có thứ tự (a, b) với a ∈ A, b ∈ B. Có |A| × |B| = 6 cặp.',
+ parts:[PR('A × B', ['(Amy,Smith)','(Amy,Jones)','(Amy,John)','(Martin,Smith)','(Martin,Jones)','(Martin,John)']), PR('B × A', ['(Smith,Amy)','(Jones,Amy)','(John,Amy)','(Smith,Martin)','(Jones,Martin)','(John,Martin)'])],
+ sol:'<p>Thứ tự trong cặp có ý nghĩa, nên A × B ≠ B × A dù cùng có 6 phần tử.</p>'},
+{n:12, p:'If L = {a, b, c, ..., z} and D = {0, 1, 2, ..., 9}, describe the format of a student email (e.g. pj207) using multiple cross products.',
+ hint:'pj207 gồm 2 chữ cái rồi đến 3 chữ số.',
+ parts:[X('Format', ['l×l×d×d×d','lxlxdxdxd','l*l*d*d*d','l²×d³','l^2×d^3','l2×d3'], 'L × L × D × D × D')],
+ sol:'<p>pj207 ∈ L × L × D × D × D. Số địa chỉ có thể tạo: 26² × 10³ = 676 000.</p>'}
+]});
+
+/* ================= 2: NUMBERS ================= */
+CH.push({no:2, title:'Numbers', vi:'Số học', intro:'Q1 đến Q4 làm không dùng máy tính. Với phân số, nhập dạng 6/7 hoặc hỗn số 2 6/7.', qs:[
+{n:1, p:'Compute (without a calculator):',
+ hint:'Trừ một số âm là cộng: 5 − (−2) = 5 + 2. Nhân/chia hai số cùng dấu cho kết quả dương, khác dấu cho kết quả âm.',
+ parts:[N('6 + −3', 3), N('5 + 0', 5), N('−3 + +7', 4), N('7 − 0', 7), N('5 − −2', 7), N('−7 − −2', -5), N('0 − 3', -3), N('−2 − −2', 0), N('4 × −2', -8), N('−2 × −5', 10), N('−10 ÷ 2', -5), N('−6 ÷ −1', 6),
+  N('2 + −7', -5), N('−1 + −6', -7), N('−10 + 2', -8), N('−2 + 2', 0), N('−3 − −5', 2), N('4 − +2', 2), N('0 − −5', 5), N('4 − 8', -4), N('−3 × 5', -15), N('5 × 0', 0), N('14 ÷ −7', -2), N('−6 − 4', -10)],
+ sol:'<p>Quy tắc: a − (−b) = a + b; (−)(−) = (+); (−)(+) = (−).</p>'},
+{n:2, p:'Fractions (give answers as fractions or mixed numbers):',
+ hint:'Cộng/trừ: cùng mẫu thì cộng tử. Hỗn số đổi ra phân số trước: 2 1/7 = 15/7. Chia phân số = nhân với nghịch đảo.',
+ parts:[N('4/7 + 2/7', 6/7, '6/7'), N('4/7 + 5/7', 9/7, '9/7 = 1 2/7'), N('2 4/7 + 2/7', 20/7, '2 6/7'), N('4 5/7 + 6/7', 39/7, '5 4/7'),
+  N('4/7 − 2/7', 2/7, '2/7'), N('2 1/7 − 2/7', 13/7, '1 6/7'), N('3 2/7 − 1 6/7', 10/7, '1 3/7'), N('5 1/7 + 6/7', 6, '6'),
+  N('3/5 × 2/5', 6/25, '6/25'), N('3/4 × 5/6', 5/8, '5/8'), N('2 1/2 × 2/3', 5/3, '1 2/3'), N('1 1/3 × 3 4/5', 76/15, '5 1/15'),
+  N('1/7 ÷ 2/3', 3/14, '3/14'), N('1/4 ÷ 5/6', 3/10, '3/10'), N('3/4 ÷ 1/8', 6, '6'), N('1 1/3 ÷ 2 4/5', 10/21, '10/21')],
+ sol:'<p>Ví dụ: 3 2/7 − 1 6/7 = 23/7 − 13/7 = 10/7 = 1 3/7. 1 1/3 × 3 4/5 = 4/3 × 19/5 = 76/15 = 5 1/15. 1 1/3 ÷ 2 4/5 = 4/3 × 5/14 = 20/42 = 10/21.</p>'},
+{n:3, p:'Decimals:', hint:'Thẳng hàng dấu thập phân khi cộng trừ. (√3)² = 3.',
+ parts:[N('0.15 + 3.7', 3.85), N('4 + 0.4 + 0.04', 4.44), N('3.6 − 0.28', 3.32), N('0.2 − 5.7', -5.5), N('0.3 × 3', 0.9), N('(√3)²', 3)]},
+{n:4, p:'Calculate (with or without a calculator). Enter answers like 4.62×10^16 or 4.62e16.',
+ hint:'Nhân: nhân hai hệ số rồi cộng số mũ. Chia: chia hệ số rồi trừ số mũ. Cộng: đưa về cùng lũy thừa trước.',
+ parts:[N('1.23×10³ + 3.46×10²', 1576, '1.576 × 10³'), N('2.78 − 3.25×10⁻²', 2.7475), N('4.2×10¹⁰ × 1.1×10⁶', 4.62e16, '4.62 × 10^16'), N('3.4×10⁻¹⁰ × 1.2×10⁶', 4.08e-4, '4.08 × 10^-4'), N('2×10¹⁰ × 2.5×10⁻⁶', 5e4, '5 × 10^4'), N('1.5×10⁻⁴ × 1.2×10⁻³', 1.8e-7, '1.8 × 10^-7'),
+  N('4.4×10¹⁰ ÷ (1.1×10⁶)', 4e4, '4 × 10^4'), N('3.6×10⁻¹⁰ ÷ (1.2×10⁶)', 3e-16, '3 × 10^-16'), N('2.5×10¹⁰ ÷ (2×10⁻⁶)', 1.25e16, '1.25 × 10^16'), N('2.4×10⁻⁴ ÷ (1.2×10⁻³)', 0.2, '0.2')],
+ sol:'<p>Ví dụ 2.5×10¹⁰ ÷ (2×10⁻⁶) = (2.5 ÷ 2) × 10^(10 − (−6)) = 1.25 × 10¹⁶.</p>'},
+{n:5, p:'Change the decimals into fractions (simplest form), and the fractions into decimals.',
+ hint:'0.205 = 205/1000, rồi rút gọn bằng ƯCLN. Với 1/3 và 5/12 là số thập phân vô hạn tuần hoàn, nhập 3 chữ số thập phân là đủ.',
+ parts:[N('0.6', 3/5, '3/5', {form:'frac'}), N('0.16', 4/25, '4/25', {form:'frac'}), N('0.004', 1/250, '1/250', {form:'frac'}), N('0.205', 41/200, '41/200', {form:'frac'}), N('1.1', 11/10, '11/10', {form:'frac'}), N('2.5', 5/2, '5/2', {form:'frac'}), N('5.06', 253/50, '253/50', {form:'frac'}), N('2.25', 9/4, '9/4', {form:'frac'}),
+  N('1/2', 0.5, '0.5', {form:'dec'}), N('4/5', 0.8, '0.8', {form:'dec'}), N('13/100', 0.13, '0.13', {form:'dec'}), N('1/3', 1/3, '0.333...', {form:'dec', tol:0.0015}), N('5/8', 0.625, '0.625', {form:'dec'}), N('5/12', 5/12, '0.41666...', {form:'dec', tol:0.0015}), N('3 1/2', 3.5, '3.5', {form:'dec'}), N('2 3/8', 2.375, '2.375', {form:'dec'})]},
+{n:6, p:'Rewrite in full without powers of 10, then put numbers in standard form (a × 10^n).',
+ hint:'Số mũ dương: dời dấu phẩy sang phải; số mũ âm: dời sang trái. Dạng chuẩn cần 1 ≤ a &lt; 10.',
+ parts:[N('8×10¹', 80, '80', {form:'plain'}), N('3.5×10³', 3500, '3500', {form:'plain'}), N('6.37×10⁻¹', 0.637, '0.637', {form:'plain'}), N('9.2×10⁻³', 0.0092, '0.0092', {form:'plain'}),
+  N('387.62', 387.62, '3.8762 × 10^2', {form:'sci'}), N('0.0099', 0.0099, '9.9 × 10^-3', {form:'sci'}), N('0.27', 0.27, '2.7 × 10^-1', {form:'sci'}), N('9000', 9000, '9 × 10^3', {form:'sci'}), N('1/20', 0.05, '5 × 10^-2', {form:'sci'})]},
+{n:7, p:'Round to 2 decimal places, round to 2 significant figures, then calculate exactly.',
+ hint:'2 dp: giữ đúng 2 chữ số sau dấu phẩy, kể cả số 0 (5 → 5.00). 2 sf: đếm từ chữ số khác 0 đầu tiên.',
+ parts:[N('87.342 (2 dp)', 87.34, '87.34', {dp:2}), N('9.2×10⁻³ (2 dp)', 0.01, '0.01', {dp:2}), N('0.0189 (2 dp)', 0.02, '0.02', {dp:2}), N('5 (2 dp)', 5, '5.00', {dp:2}), N('2.80079 (2 dp)', 2.8, '2.80', {dp:2}), N('8.4 (2 dp)', 8.4, '8.40', {dp:2}), N('3.85×10⁻³ (2 dp)', 0, '0.00', {dp:2}),
+  N('384 (2 sf)', 380), N('12340 (2 sf)', 12000), N('0.000782 (2 sf)', 0.00078), N('456000 (2 sf)', 460000), N('0.203 (2 sf)', 0.2, '0.20'), N('13.6 (2 sf)', 14),
+  N('259 × 11.65 (exact)', 3017.35, '3017.35 (ước lượng 260 × 12 ≈ 3100)', {tol:0.005}), N('300 × 0.73 (exact)', 219, '219 (ước lượng 300 × 0.7 = 210)'), N('872635 × 0.00798 (exact)', 6963.6273, '6963.6273 (ước lượng 900 000 × 0.008 = 7200)', {tol:0.001})]},
+{n:8, p:'Convert to base 10.',
+ hint:'Nhân mỗi chữ số với lũy thừa của cơ số theo vị trí: 403₅ = 4×25 + 0×5 + 3. Với hệ 16: A = 10, F = 15.',
+ parts:[N('2₅', 2), N('31₅', 16), N('403₅', 103), N('1212₅', 182), N('10₂', 2), N('111₂', 7), N('1011₂', 11), N('111011₂', 59), N('33₈', 27), N('133₈', 91), N('1022₈', 530), N('777₈', 511), N('21₁₆', 33), N('AA₁₆', 170), N('192₁₆', 402), N('F07₁₆', 3847)],
+ sol:'<p>1212₅ = 125 + 2×25 + 1×5 + 2 = 182. 1022₈ = 512 + 0 + 16 + 2 = 530. F07₁₆ = 15×256 + 0 + 7 = 3847.</p>'},
+{n:9, p:'Change each number into base 2, base 8 and base 16: 45, 89, 126, 1.',
+ hint:'Chia liên tiếp cho 2 rồi đọc số dư từ dưới lên. Mẹo: gom nhị phân thành nhóm 3 bit (hệ 8) hoặc 4 bit (hệ 16) từ phải sang.',
+ parts:[B('45 → base 2', 45, 2), B('45 → base 8', 45, 8), B('45 → base 16', 45, 16), B('89 → base 2', 89, 2), B('89 → base 8', 89, 8), B('89 → base 16', 89, 16), B('126 → base 2', 126, 2), B('126 → base 8', 126, 8), B('126 → base 16', 126, 16), B('1 → base 2', 1, 2), B('1 → base 8', 1, 8), B('1 → base 16', 1, 16)],
+ sol:'<p>45 = 101101₂: nhóm 3 bit 101|101 = 55₈, nhóm 4 bit 0010|1101 = 2D₁₆. 89 = 1011001₂ = 131₈ = 59₁₆. 126 = 1111110₂ = 176₈ = 7E₁₆.</p>'},
+{n:10, p:'What is 1F9 + 3A if the numbers are in hexadecimal? What is 3 + 4 + 4 if the arithmetic is modulo 5?',
+ hint:'Cộng hệ 16 theo cột: 9 + A = 19 = 16 + 3, ghi 3 nhớ 1. Modulo 5: lấy số dư khi chia cho 5.',
+ parts:[B('1F9 + 3A (hex)', 563, 16), N('3 + 4 + 4 (mod 5)', 1)],
+ sol:'<p>1F9₁₆ = 505, 3A₁₆ = 58, tổng 563 = 233₁₆. 3 + 4 + 4 = 11 ≡ 1 (mod 5).</p>'},
+{n:11, p:'Perform the binary additions.',
+ hint:'1 + 1 = 10 (ghi 0 nhớ 1), 1 + 1 + 1 = 11 (ghi 1 nhớ 1). Có thể đổi sang thập phân để tự kiểm tra.',
+ parts:[B('1111 + 1110', 29, 2), B('111011 + 100111', 98, 2), B('1101 + 1010 + 1111', 38, 2), B('111 + 1100 + 11 + 1001', 31, 2)],
+ sol:'<p>Kiểm tra bằng hệ 10: 15 + 14 = 29 = 11101; 59 + 39 = 98 = 1100010; 13 + 10 + 15 = 38 = 100110; 7 + 12 + 3 + 9 = 31 = 11111.</p>'},
+{n:12, p:'Perform the binary subtractions by ordinary borrowing and then by the 2’s complement method (be careful with the number of digits).',
+ hint:'2’s complement: đệm số trừ cho đủ số chữ số của số bị trừ, đảo bit, cộng 1, cộng vào số bị trừ rồi bỏ bit 1 tràn ở bên trái.',
+ parts:[B('1110 − 11', 11, 2), B('110101 − 1011', 42, 2), B('1101 − 1001', 4, 2), B('100000 − 1', 31, 2)],
+ sol:'<p>Ví dụ 1110 − 11: đệm 11 thành 0011, đảo bit được 1100, cộng 1 được 1101. 1110 + 1101 = 11011, bỏ bit 1 đầu: 1011 (= 14 − 3 = 11). Tương tự 110101 − 001011: đảo 110100, +1 = 110101, cộng: 1101010, bỏ bit đầu: 101010 (= 42).</p>'}
+]});
+
+/* ================= 3: ALGEBRA ================= */
+CH.push({no:3, title:'Algebra', vi:'Đại số', intro:'Ô công thức nhận biểu thức như 0.2(S − 6000) hoặc T = 0.2*S − 1200. Bộ chấm thử công thức tại nhiều giá trị nên mọi dạng tương đương đều được tính đúng.', qs:[
+{n:1, p:'An HP printer prints 20 sheets of A4 a minute, an Epson prints 15 a minute. How long does a 120-sheet job take on each?',
+ hint:'Thời gian = số trang ÷ tốc độ.', parts:[N('HP (minutes)', 6), N('Epson (minutes)', 8)]},
+{n:2, p:'Everyone has a personal allowance of 6000 and the tax rate is 20%. Set up a formula for the tax T paid on salary S. Test: salary £18 000 should pay £2400.',
+ hint:'Chỉ phần lương vượt 6000 mới bị đánh thuế.', parts:[FM('T =', function(e){ return 0.2*(e.S - 6000); }, ['S'], 'T = 0.2(S − 6000)', 'Dùng biến S')],
+ sol:'<p>T = 0.2(S − 6000). Kiểm tra: 0.2 × (18 000 − 6000) = 0.2 × 12 000 = 2400. Đúng.</p>'},
+{n:3, p:'Each flat needs a minimum of 6 m² per person plus 20 m² shared space. Write a formula for the total space A for n people and find the maximum number of people allowed in a flat of 65 m².',
+ hint:'Giải 6n + 20 ≤ 65 rồi làm tròn xuống vì số người là số nguyên.', parts:[FM('A =', function(e){ return 6*e.n + 20; }, ['n'], 'A = 6n + 20', 'Dùng biến n'), N('Max people', 7)],
+ sol:'<p>6n + 20 ≤ 65 ⇒ 6n ≤ 45 ⇒ n ≤ 7.5. Tối đa 7 người.</p>'},
+{n:4, p:'Solve the equations.', hint:'Làm cùng một phép biến đổi ở hai vế. Với 5/x = 15, nhân hai vế với x trước.',
+ parts:[N('a) 8x − 1 = 15', 2), N('b) 4(x − 1) = 24', 7), N('c) 5(x + 3) = 2x − 6', -7), N('d) 5/x = 15', 1/3, '1/3'), N('e) 5/(3x) = 20/9', 3/4, '3/4')],
+ sol:'<p>c) 5x + 15 = 2x − 6 ⇒ 3x = −21 ⇒ x = −7. e) Nhân chéo: 45 = 60x ⇒ x = 3/4.</p>'},
+{n:5, p:'Rearrange to make x the subject.', hint:'Đưa các số hạng không chứa x sang vế kia, rồi chia cho hệ số của x.',
+ parts:[FM('a) 3x + y = 7', function(e){ return (7 - e.y)/3; }, ['y'], 'x = (7 − y)/3', 'x = ...'), FM('b) y = x − 5', function(e){ return e.y + 5; }, ['y'], 'x = y + 5', 'x = ...'), FM('c) 3 − 4x = y', function(e){ return (3 - e.y)/4; }, ['y'], 'x = (3 − y)/4', 'x = ...'), FM('d) 4/x = 5(y + z)', function(e){ return 4/(5*(e.y + e.z)); }, ['y','z'], 'x = 4/(5(y + z))', 'x = ...'), FM('e) 2(x + 3) = y', function(e){ return e.y/2 - 3; }, ['y'], 'x = y/2 − 3', 'x = ...')]},
+{n:6, p:'Sleep needed S (hours) for a child of age A (years): S = 15 − ½A.', hint:'(c) Thay A = S/2 vào công thức rồi giải.',
+ parts:[N('a) S for age 10', 10), N('b) Age if S = 11', 8), N('c) Age if age = half the sleep hours', 6)],
+ sol:'<p>c) A = S/2 nên S = 2A. 2A = 15 − A/2 ⇒ 2.5A = 15 ⇒ A = 6 (ngủ 12 giờ).</p>'},
+{n:7, p:'Final amount = A(1 + r/100)ⁿ.', hint:'(b) Muốn gấp đôi sau 2 năm: (1 + r/100)² = 2.',
+ parts:[N('a) £10 000, 5 years, 4% (£)', 12166.53, '12166.53', {tol:0.01}), N('b) Rate to double in 2 years (%)', 41.42, '41.42', {tol:0.01})],
+ sol:'<p>a) 10 000 × 1.04⁵ = 12 166.53. b) 1 + r/100 = √2 ⇒ r = 100(√2 − 1) ≈ 41.42%.</p>'},
+{n:8, p:'Inheritance tax is 40% on amounts over £350 000.', hint:'Giống Q2: thuế chỉ tính trên phần vượt ngưỡng.',
+ parts:[FM('a) T =', function(e){ return 0.4*(e.M - 350000); }, ['M'], 'T = 0.4(M − 350000)', 'Dùng biến M'), N('b) Tax on £700 000', 140000), N('c) Inherited if tax is £38 000', 445000)],
+ sol:'<p>c) 38 000 = 0.4(M − 350 000) ⇒ M − 350 000 = 95 000 ⇒ M = 445 000.</p>'},
+{n:9, p:'Wages are £5.76 an hour up to 40 hours a week; overtime is paid at time and a half.', hint:'Lương tăng ca = 1.5 × 5.76 = 8.64 mỗi giờ.',
+ parts:[N('a) Wage for a 40-hour week (£)', 230.4, '230.40'), FM('b) W in terms of H', function(e){ return 230.4 + 8.64*(e.H - 40); }, ['H'], 'W = 230.40 + 8.64(H − 40) = 8.64H − 115.2', 'W = ...'), FM('c) H in terms of W', function(e){ return (e.W + 115.2)/8.64; }, ['W'], 'H = (W + 115.2)/8.64', 'H = ...'), N('d) Hours for £290.88', 47)],
+ sol:'<p>d) H = (290.88 + 115.2)/8.64 = 406.08/8.64 = 47 giờ (7 giờ tăng ca).</p>'},
+{n:10, p:'Solve the quadratic equations (list all real roots; write "none" if there are none).', hint:'Thử phân tích thành nhân tử trước. Kiểm tra biệt thức b² − 4ac: âm thì vô nghiệm thực.',
+ parts:[RT('x² + 4x = 0', [0, -4], '0, −4'), RT('x² + 8x + 7 = 0', [-1, -7], '−1, −7'), RT('2x² + 7x + 3 = 0', [-0.5, -3], '−1/2, −3'), RT('x² − 6x + 9 = 0', [3], '3 (nghiệm kép)'), RT('x² + 2x + 1 = 0', [-1], '−1 (nghiệm kép)'), RT('x² + x + 2 = 0', [], 'none (vô nghiệm thực)')],
+ sol:'<p>2x² + 7x + 3 = (2x + 1)(x + 3). x² + x + 2 có b² − 4ac = 1 − 8 = −7 &lt; 0 nên không có nghiệm thực (nghiệm phức (−1 ± i√7)/2).</p>'}
+]});
+
+/* ================= 4: LOGIC ================= */
+CH.push({no:4, title:'Logic', vi:'Logic mệnh đề và vị từ', intro:'Ô logic nhận ¬ ∧ ∨ → ↔ ⊕ hoặc gõ tắt: ~ & | -> <-> xor. Bộ chấm so sánh bảng chân trị, nên mọi biểu thức tương đương đều đúng. Ô bảng chân trị nhập T hoặc F.', qs:[
+{n:1, p:'p: "Andy is tall", q: "Andy is dark haired". Write in symbolic form.', hint:'"short" là ¬p, "fair haired" là ¬q. "but" trong logic là ∧.',
+ parts:[LG('(i) Andy is tall and dark haired', 'p∧q', ['p','q']), LG('(ii) Tall but not dark haired', 'p∧¬q', ['p','q']), LG('(iii) Dark haired but short', 'q∧¬p', ['p','q']), LG('(iv) It is not true that Andy is short and fair haired', '¬(¬p∧¬q)', ['p','q'])],
+ sol:'<p>(iv) ¬(¬p ∧ ¬q) ≡ p ∨ q theo De Morgan: Andy cao hoặc tóc sẫm.</p>'},
+{n:2, p:'s: "Mary speaks Spanish", g: "Mary speaks German". Interpret each formula.', hint:'¬(¬s ∧ ¬g) dùng De Morgan để đọc dễ hơn.',
+ parts:[O('s ∧ g', 'Mary speaks Spanish and German.'), O('s ∨ g', 'Mary speaks Spanish or German (or both).'), O('s ∧ ¬g', 'Mary speaks Spanish but not German.'), O('¬¬s', 'Mary speaks Spanish.'), O('¬(¬s ∧ ¬g)', 'It is not the case that Mary speaks neither, so she speaks Spanish or German.'), O('¬s ∨ ¬g', 'Mary does not speak Spanish or does not speak German (she does not speak both).')]},
+{n:3, p:'Using truth tables show the equivalences.', hint:'Điền từng cột từ trái sang phải. Hai cột cuối giống hệt nhau thì hai biểu thức tương đương.',
+ parts:[TT('(i) ¬a ∨ ¬b ≡ ¬(a ∧ b)', ['a','b'], [{h:'¬a', e:'¬a'}, {h:'¬b', e:'¬b'}, {h:'¬a ∨ ¬b', e:'¬a∨¬b'}, {h:'a ∧ b', e:'a∧b'}, {h:'¬(a ∧ b)', e:'¬(a∧b)'}]),
+  TT('(ii) a ∨ ¬(b ∧ c) ≡ (a ∨ ¬b) ∨ ¬c', ['a','b','c'], [{h:'b ∧ c', e:'b∧c'}, {h:'¬(b ∧ c)', e:'¬(b∧c)'}, {h:'a ∨ ¬(b ∧ c)', e:'a∨¬(b∧c)'}, {h:'a ∨ ¬b', e:'a∨¬b'}, {h:'(a ∨ ¬b) ∨ ¬c', e:'(a∨¬b)∨¬c'}])],
+ sol:'<p>Ở (ii), cả hai vế chỉ sai ở đúng một dòng: a = F, b = T, c = T.</p>'},
+{n:4, p:'Find the truth table for (p ∨ q) ∧ ¬(p ∧ q), the exclusive or p ⊕ q. If p: "Tom wears socks" and q: "Tom wears sandals", interpret p ⊕ q.',
+ hint:'Kết quả đúng khi đúng một trong hai biến đúng.',
+ parts:[TT('Truth table', ['p','q'], [{h:'p ∨ q', e:'p∨q'}, {h:'p ∧ q', e:'p∧q'}, {h:'¬(p ∧ q)', e:'¬(p∧q)'}, {h:'(p ∨ q) ∧ ¬(p ∧ q)', e:'p⊕q'}]), O('Interpret p ⊕ q', 'Tom wears socks or sandals, but not both.')]},
+{n:5, p:'Using the laws of propositions show that (a ∧ ¬b) ∨ b ≡ a ∨ b.', hint:'Dùng luật phân phối cho ∨ trên ∧, rồi luật bù b ∨ ¬b ≡ t.',
+ parts:[O('Proof', '(a ∧ ¬b) ∨ b ≡ (a ∨ b) ∧ (¬b ∨ b) [distributive] ≡ (a ∨ b) ∧ t [complement] ≡ a ∨ b [identity]')]},
+{n:6, p:'Find the truth table for (p → q) ∧ (q → p), written p ↔ q.', hint:'p → q chỉ sai khi p = T và q = F.',
+ parts:[TT('Truth table', ['p','q'], [{h:'p → q', e:'p→q'}, {h:'q → p', e:'q→p'}, {h:'(p → q) ∧ (q → p)', e:'p↔q'}])]},
+{n:7, p:'Show using a truth table that s → p ≡ ¬p → ¬s. With s: "you studied hard" and p: "you pass your exams", state the two equivalent statements.', hint:'¬p → ¬s gọi là mệnh đề phản đảo (contrapositive).',
+ parts:[TT('Truth table', ['s','p'], [{h:'¬p', e:'¬p'}, {h:'¬s', e:'¬s'}, {h:'s → p', e:'s→p'}, {h:'¬p → ¬s', e:'¬p→¬s'}]), O('Two equivalent statements', '"If you studied hard then you pass your exams" ≡ "If you do not pass your exams then you did not study hard".')]},
+{n:8, p:'Using truth tables determine the validity of the arguments.', hint:'Lập luận hợp lệ khi ở MỌI dòng mà tất cả tiền đề đều đúng thì kết luận cũng đúng.',
+ parts:[TT('(i) p ∨ q, ¬p ⊢ q', ['p','q'], [{h:'p ∨ q', e:'p∨q'}, {h:'¬p', e:'¬p'}]), CHO('(i) Argument', ['Valid', 'Invalid'], 0),
+  TT('(ii) p → ¬q, ¬r → p, p ⊢ r', ['p','q','r'], [{h:'¬q', e:'¬q'}, {h:'p → ¬q', e:'p→¬q'}, {h:'¬r', e:'¬r'}, {h:'¬r → p', e:'¬r→p'}]), CHO('(ii) Argument', ['Valid', 'Invalid'], 1)],
+ sol:'<p>(i) Chỉ dòng p = F, q = T có cả hai tiền đề đúng, và kết luận q đúng: hợp lệ. (ii) Dòng p = T, q = F, r = F: ba tiền đề đều đúng nhưng kết luận r sai, nên không hợp lệ.</p>'},
+{n:9, p:'If I go out to work, I cannot study. Either I study or I complete my coursework but not both. I went out to work. Therefore I completed my coursework. (w: go out to work, s: study, c: complete coursework)', hint:'Dùng ⊕ cho "either ... or ... but not both".',
+ parts:[LG('Premise 1', 'w→¬s', ['w','s','c']), LG('Premise 2', 's⊕c', ['w','s','c']), CHO('Argument', ['Valid', 'Invalid'], 0)],
+ sol:'<p>w đúng nên ¬s đúng (s sai). s ⊕ c đúng mà s sai thì c đúng. Không có dòng nào tiền đề đúng mà kết luận sai: lập luận hợp lệ.</p>'},
+{n:10, p:'s: I will go to school, i: I feel sick, w: I sleep twelve hours a day, e: I had too much exercise. "I will go to school if I do not feel sick. I sleep 12 hours a day and feel sick if and only if I have had too much exercise. I did not sleep 12 hours today. Therefore I did not have too much exercise and I will go to school."', hint:'"s if ¬i" là ¬i → s. Thử tìm một dòng các tiền đề đúng mà kết luận sai.',
+ parts:[LG('Premise 1', '¬i→s', ['s','i','w','e']), LG('Premise 2', '(w∧i)↔e', ['s','i','w','e']), LG('Premise 3', '¬w', ['s','i','w','e']), LG('Conclusion', '¬e∧s', ['s','i','w','e']), CHO('Argument', ['Valid', 'Invalid'], 1)],
+ sol:'<p>Phản ví dụ: s = F, i = T, w = F, e = F. ¬i → s = F → F = T; (w ∧ i) ↔ e = F ↔ F = T; ¬w = T. Kết luận ¬e ∧ s = T ∧ F = F. Vậy lập luận không hợp lệ (ốm thì có thể không đến trường).</p>'},
+{n:11, p:'p and q are the inputs to the circuit: an OR gate (p, q) and an AND gate (p, q) followed by a NOT, both feeding a final AND gate. What is the output in simplest form?', hint:'Viết biểu thức cho từng cổng rồi ghép lại.',
+ parts:[LG('Output', 'p⊕q', ['p','q'], '(p ∨ q) ∧ ¬(p ∧ q) = p ⊕ q')], sol:'<p>Đây chính là cổng XOR.</p>'},
+{n:12, p:'Write the Boolean expression for each circuit and simplify. (i) p → NOT, AND with q, then NOT. (ii) p AND q, then NOT, then AND with the branch taken from p.', hint:'Dùng De Morgan và luật phân phối. Ở (ii), đường rẽ nhánh phía dưới xuất phát từ dây p.',
+ parts:[LG('(i) Simplified output', 'p∨¬q', ['p','q'], '¬(¬p ∧ q) = p ∨ ¬q'), LG('(ii) Simplified output', 'p∧¬q', ['p','q'], '¬(p ∧ q) ∧ p = p ∧ ¬q'), O('Simplified circuits', '(i) Một cổng OR với đầu vào p và ¬q. (ii) Một cổng AND với đầu vào p và ¬q.')],
+ sol:'<p>(ii) ¬(p ∧ q) ∧ p ≡ (¬p ∨ ¬q) ∧ p ≡ (¬p ∧ p) ∨ (¬q ∧ p) ≡ f ∨ (p ∧ ¬q) ≡ p ∧ ¬q.</p>'},
+{n:'P1', sec:'Predicate logic', p:'Universe: all quadrilaterals. p(x): parallelogram, s(x): all sides equal, a(x): all angles equal, r(x): rectangle, q(x): square. Translate and decide the truth of each statement.', hint:'Nghĩ tới hình thoi (rhombus): 4 cạnh bằng nhau nhưng các góc không bằng nhau.',
+ parts:[TF('(i) ∀x (s(x) → q(x))', false), TF('(ii) ∃x (s(x) ∧ a(x))', true), TF('(iii) ∃x (s(x) ∧ ¬p(x))', false), TF('(iv) ∀x ((s(x) ∧ a(x)) → q(x))', true), TF('(v) ∃x (a(x) ∧ ¬(r(x) ∨ q(x)))', false)],
+ sol:'<p>(i) "Every quadrilateral with equal sides is a square": sai, phản ví dụ hình thoi. (ii) "Some quadrilateral has equal sides and equal angles": đúng, hình vuông. (iii) "Some equal-sided quadrilateral is not a parallelogram": sai, cạnh bằng nhau thì là hình thoi, luôn là hình bình hành. (iv) đúng theo định nghĩa hình vuông. (v) "Some equiangular quadrilateral is neither rectangle nor square": sai, bốn góc bằng nhau thì mỗi góc 90°, tức là hình chữ nhật.</p>'},
+{n:'P2', p:'Sets E (employees), PT (project teams), J (job titles); predicates IsInProjectTeam(e, p), EmployedAs(e, j), Leader(e, p), ManagedBy(e, s). Represent the statements in predicate calculus.', hint:'"implies" là →, "either ... or" là ∨.',
+ parts:[O('(i) If Jim is employed as a programmer then he will be working as a member of team2 and will be managed by Sally.', 'EmployedAs(Jim, programmer) → (IsInProjectTeam(Jim, team2) ∧ ManagedBy(Jim, Sally))'), O('(ii) Sally being leader of team2 implies she is a systems analyst or a C++ programmer.', 'Leader(Sally, team2) → (EmployedAs(Sally, systemsAnalyst) ∨ EmployedAs(Sally, C++Programmer))')]},
+{n:'P3', p:'Universe: all fruit. j(x) juicy, y(x) yellow, r(x) red, g(x) grows on a tree, b(x) grows on a bush. Translate and give your opinion of the truth values.', hint:'Tìm một loại quả làm phản ví dụ.',
+ parts:[O('(i) ∀x (r(x) → j(x))', 'All red fruits are juicy. Tranh luận được; phần lớn đúng nhưng có phản ví dụ khó tranh cãi.'), TF('(ii) ¬∃x (r(x) ∧ g(x))', false), TF('(iii) ∀x (y(x) ∨ r(x))', false), O('(iv) ∀x ((y(x) ∧ ¬j(x)) → b(x))', 'Every yellow fruit that is not juicy grows on a bush. Có lẽ sai: chuối là quả vàng, không mọng nước và không mọc trên bụi.')],
+ sol:'<p>(ii) "No red fruit grows on a tree": sai, táo và anh đào. (iii) "Every fruit is yellow or red": sai, nho xanh hay việt quất.</p>'},
+{n:'P4', p:'x is a positive integer. Decide the truth value of each statement.', hint:'∃ chỉ cần một ví dụ; ∀ chỉ cần một phản ví dụ để sai.',
+ parts:[TF('∃x (2x = 20)', true), TF('∀x (3x = 20)', false), TF('∀x (x > 8)', false), TF('∃x (x > 8)', true)],
+ sol:'<p>x = 10 làm 2x = 20. 3x = 20 không có nghiệm nguyên. x = 1 là phản ví dụ cho ∀x (x &gt; 8). x = 9 làm ∃x (x &gt; 8) đúng.</p>'},
+{n:'P5-6', p:'Write English sentences which are the negations of: "All birds sing", "Some bears swim", "No dog can sing". Then express each symbolically and negate.', hint:'¬∀x P(x) ≡ ∃x ¬P(x) và ¬∃x P(x) ≡ ∀x ¬P(x).',
+ parts:[O('Not (all birds sing)', 'Some birds do not sing. ∀x (b(x) → s(x)) phủ định thành ∃x (b(x) ∧ ¬s(x)).'), O('Not (some bears swim)', 'No bears swim. ∃x (B(x) ∧ w(x)) phủ định thành ∀x (B(x) → ¬w(x)).'), O('Not (no dog can sing)', 'Some dogs can sing. ∀x (d(x) → ¬s(x)) phủ định thành ∃x (d(x) ∧ s(x)).')]},
+{n:'P7', p:'r(x): x ≥ 4, s(x): x ≤ 5, where x and y are integers. Which are true?', hint:'Mọi số nguyên đều ≥ 4 hoặc ≤ 5.',
+ parts:[TF('(i) ∃x r(x)', true), TF('(ii) ∀y s(y)', false), TF('(iii) ∀x (r(x) ∧ s(x))', false), TF('(iv) ∃y ¬r(y)', true), TF('(v) ∃x (r(x) ∧ s(x))', true), TF('(vi) ∀x (r(x) ∨ s(x))', true)],
+ sol:'<p>(v) đúng với x = 4 hoặc 5. (vi) đúng vì nếu x &lt; 4 thì x ≤ 5.</p>'},
+{n:'P8', p:'Define a universe and predicates to translate into symbols. Negate (i) and (iv).', hint:'Universe: students. S(x): x sleeps too much. L(x): x is late to lectures.',
+ parts:[O('(i) All students sleep too much', '∀x S(x). Phủ định: ∃x ¬S(x).'), O('(ii) All students are late to lectures', '∀x L(x)'), O('(iii) Some students sleep too much and are late', '∃x (S(x) ∧ L(x))'), O('(iv) Some students do not sleep too much', '∃x ¬S(x). Phủ định: ∀x S(x).')]}
+]});
+/* ================= 5: RELATIONS, MAPPINGS AND FUNCTIONS ================= */
+CH.push({no:5, title:'Relations, Mappings and Functions', vi:'Quan hệ, ánh xạ và hàm', qs:[
+{n:1, p:'A = {s, t, u, v}, B = {5, 6, 7, 8}. g: A → B is defined by g(s) = 5, g(t) = 5, g(u) = 6, g(v) = 7.', hint:'Range là tập các giá trị thực sự được g "chạm tới", có thể nhỏ hơn co-domain.',
+ parts:[X('i) Domain of g', ['a','{s,t,u,v}'], 'A'), X('i) Co-domain of g', ['b','{5,6,7,8}'], 'B'), N('ii) Image of t', 5), S('iii) Range of g', [5,6,7], null, {numeric:true})]},
+{n:2, p:'B = {5, 6, 7, 8}, C = {1, 2, ..., 40}. f: B → C is defined by f(a) = 4a + 1.', hint:'Thay từng phần tử của B vào 4a + 1.',
+ parts:[N('f(5)', 21), N('f(7)', 29), N('Image of 6', 25), S('Domain of f', [5,6,7,8], null, {numeric:true}), S('Range of f', [21,25,29,33], null, {numeric:true})]},
+{n:3, p:'Are the functions g (question 1) and f (question 2) onto? One-one?', hint:'Onto: mọi phần tử của co-domain đều có tạo ảnh. One-one: hai phần tử khác nhau cho hai ảnh khác nhau.',
+ parts:[CHO('g onto?', ['Yes','No'], 1), CHO('g one-one?', ['Yes','No'], 1), CHO('f onto?', ['Yes','No'], 1), CHO('f one-one?', ['Yes','No'], 0)],
+ sol:'<p>g không onto vì 8 không có tạo ảnh; không one-one vì g(s) = g(t) = 5. f không onto vì range {21, 25, 29, 33} nhỏ hơn C; f là one-one vì 4a + 1 tăng thật sự.</p>'},
+{n:4, p:'Using f and g from questions 1 and 2, find f ∘ g. Why is it not possible to define g ∘ f?', hint:'f ∘ g nghĩa là làm g trước rồi f: (f ∘ g)(x) = f(g(x)).',
+ parts:[PR('f ∘ g as pairs (x, f(g(x)))', ['(s,21)','(t,21)','(u,25)','(v,29)']), O('Why not g ∘ f?', 'g ∘ f cần g(f(x)), nhưng f cho giá trị trong C (21, 25, ...) mà các số này không thuộc miền xác định A của g.')]},
+{n:5, p:'Find the inverses where possible.', hint:'Hàm có ngược khi là song ánh (one-one và onto). Với f(x) = 2x − 1, đặt y = 2x − 1 rồi giải x theo y.',
+ parts:[PR('(i) h⁻¹ where h(a) = y, h(b) = x, h(c) = z', ['(y,a)','(x,b)','(z,c)'], '(y,a), (x,b), (z,c)'), FM('(ii) f⁻¹(x) for f(x) = 2x − 1', function(e){ return (e.x + 1)/2; }, ['x'], 'f⁻¹(x) = (x + 1)/2', 'f⁻¹(x) = ...'), CHO('(iii) g(x) = 2x² − 1 on R', ['Inverse is √((x + 1)/2)', 'No inverse: g is not one-one'], 1)],
+ sol:'<p>(iii) g(1) = g(−1) = 1, nên g không one-one và không có hàm ngược trên R (trừ khi giới hạn miền xác định, ví dụ x ≥ 0).</p>'},
+{n:6, p:'For each function find f(3), f(−2), f(0), sketch the graph and find the range: (i) f(x) = x − 2, (ii) f(x) = 2x² + 4, (iii) f(x) = x² − 6x + 5, (iv) f(x) = 4ˣ.', hint:'(iii) Hoàn thành bình phương: x² − 6x + 5 = (x − 3)² − 4. 4ˣ luôn dương.',
+ parts:[N('(i) f(3)', 1), N('(i) f(−2)', -4), N('(i) f(0)', -2), X('(i) Range', ['r','ℝ','(-∞,∞)','allrealnumbers','f(x)∈r','y∈r'], 'ℝ (all real numbers)'),
+  N('(ii) f(3)', 22), N('(ii) f(−2)', 12), N('(ii) f(0)', 4), X('(ii) Range', ['f(x)≥4','y≥4','[4,∞)','≥4','f≥4'], 'f(x) ≥ 4'),
+  N('(iii) f(3)', -4), N('(iii) f(−2)', 21), N('(iii) f(0)', 5), X('(iii) Range', ['f(x)≥-4','y≥-4','[-4,∞)','≥-4','f≥-4'], 'f(x) ≥ −4'),
+  N('(iv) f(3)', 64), N('(iv) f(−2)', 1/16, '1/16'), N('(iv) f(0)', 1), X('(iv) Range', ['f(x)>0','y>0','(0,∞)','>0','f>0'], 'f(x) > 0')],
+ sol:'<div class="figs"><figure>' + G.plot({xr:[-4,6], yr:[-6,24], fns:[{f:function(x){return x-2;}, c:0}, {f:function(x){return 2*x*x+4;}, c:1}, {f:function(x){return x*x-6*x+5;}, c:2}, {f:function(x){return Math.pow(4,x);}, c:3}]}) + G.legend(['x − 2','2x² + 4','x² − 6x + 5','4ˣ']) + '</figure></div>'},
+{n:7, p:'Plot the graphs (in Excel or similar) of y = x + 2, y = 2x, y = x², y = 2ˣ.', hint:'Lập bảng giá trị x từ −3 đến 3 rồi chèn biểu đồ Scatter with smooth lines.',
+ parts:[O('Plots', 'So sánh với hình trong lời giải: hai đường thẳng, một parabol và một đường cong mũ.')],
+ sol:'<div class="figs"><figure>' + G.plot({xr:[-3,3], yr:[-4,9], fns:[{f:function(x){return x+2;}}, {f:function(x){return 2*x;}}, {f:function(x){return x*x;}}, {f:function(x){return Math.pow(2,x);}}]}) + G.legend(['x + 2','2x','x²','2ˣ']) + '</figure></div>'},
+{n:8, p:'Write down log₂16, log₂0.25, log₂3.5.', hint:'log₂ N là số mũ k sao cho 2ᵏ = N. log₂3.5 = ln 3.5 / ln 2.',
+ parts:[N('log₂ 16', 4), N('log₂ 0.25', -2), N('log₂ 3.5', 1.807, '1.807', {tol:0.001})]},
+{n:9, p:'Find the amplitude, period and frequency of y = 4 sin πt, y = 2 sin 3πt, y = 2 sin (πt/2).', hint:'y = a sin(ωt): biên độ a, chu kỳ T = 2π/ω, tần số f = 1/T.',
+ parts:[N('4 sin πt: amplitude', 4), N('4 sin πt: period', 2), N('4 sin πt: frequency', 0.5), N('2 sin 3πt: amplitude', 2), N('2 sin 3πt: period', 2/3, '2/3'), N('2 sin 3πt: frequency', 1.5), N('2 sin (πt/2): amplitude', 2), N('2 sin (πt/2): period', 4), N('2 sin (πt/2): frequency', 0.25)],
+ sol:'<div class="figs"><figure>' + G.plot({xr:[0,4], yr:[-4.5,4.5], fns:[{f:function(t){return 4*Math.sin(Math.PI*t);}}, {f:function(t){return 2*Math.sin(3*Math.PI*t);}}, {f:function(t){return 2*Math.sin(Math.PI*t/2);}}], xl:'t'}) + G.legend(['4 sin πt','2 sin 3πt','2 sin (πt/2)']) + '</figure></div>'},
+{n:10, p:'In the example on relations (from the lecture), find p₂ ∘ p₁⁻¹(Stephen).', hint:'p₁⁻¹(Stephen) là tập các cặp có thành phần đầu là Stephen; p₂ lấy thành phần thứ hai của các cặp đó.',
+ parts:[O('Answer', 'Cần dữ liệu ví dụ trong bài giảng trên Moodle. Cách làm: liệt kê mọi cặp (Stephen, y) trong quan hệ, đáp án là tập các y.')]},
+{n:11, p:'Bob, Carol, Ted and Alice work on projects V1 to V6: V1: Bob, Ted, Carol. V2: Alice. V3: Bob, Carol. V4: Bob, Alice. V5: Bob, Ted. V6: Bob, Carol, Ted, Alice. Find the relation (a subset of V × R) and use projection mappings.', hint:'Mỗi cặp (dự án, lập trình viên) là một phần tử. Có 14 cặp.',
+ parts:[PR('Relation', ['(V1,Bob)','(V1,Ted)','(V1,Carol)','(V2,Alice)','(V3,Bob)','(V3,Carol)','(V4,Bob)','(V4,Alice)','(V5,Bob)','(V5,Ted)','(V6,Bob)','(V6,Carol)','(V6,Ted)','(V6,Alice)']), S('(i) Programmers on V3: p₂(p₁⁻¹(V3))', ['Bob','Carol']), S('(ii) Projects of Ted: p₁(p₂⁻¹(Ted))', ['V1','V5','V6'])]}
+]});
+
+/* ================= 6: TRIGONOMETRY ================= */
+CH.push({no:6, title:'Trigonometry', vi:'Lượng giác', intro:'Có thể nhập π trực tiếp, ví dụ 7π/6 hoặc 7pi/6.', qs:[
+{n:1, p:'Convert from degrees to radians.', hint:'Nhân với π/180.',
+ parts:[N('720°', 4*Math.PI, '4π'), N('210°', 7*Math.PI/6, '7π/6'), N('180°', Math.PI, 'π'), N('90°', Math.PI/2, 'π/2'), N('135°', 3*Math.PI/4, '3π/4'), N('315°', 7*Math.PI/4, '7π/4'), N('30°', Math.PI/6, 'π/6'), N('0°', 0)]},
+{n:2, p:'Convert from radians to degrees.', hint:'Nhân với 180/π, tức là thay π bằng 180°.',
+ parts:[N('7π/4', 315), N('10π/3', 600), N('π/3', 60), N('π', 180), N('7π/6', 210), N('π/2', 90), N('5π/2', 450), N('5π', 900)]},
+{n:3, p:'A silver pendant is a sector of a circle with radius 3 cm and area 6 cm². Find θ in radians.', hint:'Diện tích hình quạt = ½ r² θ.',
+ parts:[N('θ (rad)', 4/3, '4/3 ≈ 1.333', {tol:0.005})], sol:'<p>½ × 3² × θ = 6 ⇒ 4.5θ = 6 ⇒ θ = 4/3 rad.</p>'},
+{n:4, p:'An oil drum of diameter 60 cm floats with chord PQ on the surface; the arc PQ under the water is 50 cm. (i) Find θ in radians. (ii) The drum is 1 metre long; find the volume below the surface.', hint:'Cung = rθ với r = 30. Phần chìm là viên phân (segment): ½ r²(θ − sin θ), rồi nhân chiều dài 100 cm.',
+ parts:[N('(i) θ (rad)', 5/3, '5/3 ≈ 1.667', {tol:0.005}), N('(ii) Volume (cm³)', 30207, '≈ 30 207 cm³ (khoảng 30.2 lít)', {tol:60})],
+ sol:'<p>θ = 50/30 = 5/3 rad. Diện tích viên phân = ½ × 900 × (5/3 − sin(5/3)) = 450 × (1.6667 − 0.9954) ≈ 302.07 cm². Thể tích ≈ 302.07 × 100 ≈ 30 207 cm³ = 0.0302 m³. Nhớ đặt máy tính ở chế độ radian khi tính sin(5/3).</p>'},
+{n:5, p:'Show sin 30° = ½, and then derive cos 30°.', hint:'Lấy tam giác đều cạnh 2, chia đôi bằng đường cao.',
+ parts:[N('sin 30°', 0.5, '1/2'), N('cos 30°', Math.sqrt(3)/2, '√3/2 ≈ 0.866', {tol:0.001})],
+ sol:'<p>Tam giác đều cạnh 2 có các góc 60°. Đường cao chia nó thành hai tam giác vuông với góc 30°, cạnh huyền 2, cạnh đối diện góc 30° bằng 1. Vậy sin 30° = 1/2. Đường cao = √(2² − 1²) = √3, nên cos 30° = √3/2.</p>'},
+{n:6, p:'Given tan 45° = 1 and tan 30° = 1/√3, find without a calculator: tan 135° and tan 150°.', hint:'tan(180° − α) = −tan α. Góc phần tư thứ hai, tan âm.',
+ parts:[N('tan 135°', -1), N('tan 150°', -1/Math.sqrt(3), '−1/√3', {tol:0.001})]},
+{n:7, p:'Solve 3 cos x = −0.6 for 0 ≤ x ≤ 360°, giving answers to 1 decimal place.', hint:'cos x = −0.2. cos âm ở góc phần tư II và III; nghiệm thứ hai là 360° − x₁.',
+ parts:[RT('x (degrees)', [101.5, 258.5], '101.5°, 258.5°', 0.06)]},
+{n:8, p:'Solve tan x = −2 where x is in radians and −2π ≤ x ≤ 2π.', hint:'tan có chu kỳ π: lấy nghiệm cơ bản rồi cộng/trừ π cho tới khi ra khỏi khoảng.',
+ parts:[RT('x (radians)', [-4.2487, -1.1071, 2.0344, 5.1760], '−4.249, −1.107, 2.034, 5.176', 0.005)],
+ sol:'<p>tan⁻¹(−2) = −1.1071. Cộng/trừ bội số của π: −1.1071 − π = −4.2487, −1.1071 + π = 2.0344, −1.1071 + 2π = 5.1760. Bốn nghiệm.</p>'},
+{n:9, p:'Find all solutions between 0° and 360° of cos x sin x = 3 cos x.', hint:'Đừng chia hai vế cho cos x (sẽ mất nghiệm). Chuyển vế và đặt nhân tử chung.',
+ parts:[RT('x (degrees)', [90, 270], '90°, 270°')], sol:'<p>cos x (sin x − 3) = 0. sin x = 3 vô nghiệm, nên cos x = 0 ⇒ x = 90° hoặc 270°.</p>'},
+{n:10, p:'Find all solutions between 0° and 360° to 3 cos x = 2 sin² x.', hint:'Thay sin² x = 1 − cos² x để được phương trình bậc hai theo cos x.',
+ parts:[RT('x (degrees)', [60, 300], '60°, 300°')], sol:'<p>2cos² x + 3cos x − 2 = 0 ⇒ (2cos x − 1)(cos x + 2) = 0. cos x = −2 vô nghiệm, cos x = 1/2 ⇒ x = 60° hoặc 300°.</p>'}
+]});
+
+/* ================= 7: PATTERN MATCHING ================= */
+CH.push({no:7, title:'Pattern Matching and Unification', vi:'So khớp mẫu và hợp nhất', intro:'Nhập phép gán dạng X = a, Y = b. Nếu không khớp được, nhập fail.', qs:[
+{n:1, p:'Given a pattern and a value, determine the result (the example X with 1 gives X = 1).', hint:'Chỉ biến trong pattern được gán. Một biến xuất hiện nhiều lần phải nhận cùng một giá trị.',
+ parts:[BIND('X + 2X  with  a + 2a', {x:'a'}, 'X = a'), BIND('X + X  with  m + n', 'fail', 'fail (X không thể vừa là m vừa là n)'), BIND('sin(X)  with  sin(2π)', {x:['2pi','2*pi']}, 'X = 2π'), BIND('X  with  a + 100', {x:'a+100'}, 'X = a + 100')]},
+{n:2, p:'Use unification on the two patterns to determine the result (the example X with Y gives X = Y).', hint:'Hợp nhất cho phép biến ở CẢ HAI phía được gán.',
+ parts:[BIND('X + a  with  b + Y', {x:'b', y:'a'}, 'X = b, Y = a'), BIND('X + Y  with  a + Y', {x:'a'}, 'X = a'), BIND('X + s  with  t + X', 'fail', 'fail (X = t và X = s mâu thuẫn)'), BIND('likes(X, pizza)  with  likes(Fred, Y)', {x:'fred', y:'pizza'}, 'X = Fred, Y = pizza'), BIND('X  with  Y + a', {x:'y+a'}, 'X = Y + a')]}
+]});
+
+/* ================= 8: VECTORS AND MATRICES ================= */
+CH.push({no:8, title:'Vectors and Matrices', vi:'Vectơ và ma trận', intro:'Nhập ma trận theo hàng, ngăn cách hàng bằng dấu chấm phẩy: 1 2; 3 4. Phần tử có thể là phân số. Nếu phép tính không thực hiện được, nhập "impossible".', qs:[
+{n:1, p:'p = (10, 3), q = (−2, 5), r = (3, −2). Find p + 3q, q − r, p + q − r.', hint:'Cộng trừ theo từng thành phần.',
+ parts:[{t:'vec', l:'p + 3q', a:[4,18], s:'(4, 18)', ph:'(x, y)'}, {t:'vec', l:'q − r', a:[-5,7], s:'(−5, 7)', ph:'(x, y)'}, {t:'vec', l:'p + q − r', a:[5,10], s:'(5, 10)', ph:'(x, y)'}]},
+{n:2, p:'A = (1 1; −2 5), B = (6 1; 2 −3; 2 1), C = (2 0 4), D = (3; 1; −2), E = (1 −5 8 1 0; 2 1 2 −2 5), F = (2 6; 4 3). Evaluate where possible.', hint:'Cộng/trừ cần cùng kích thước. Tích m×n với p×q cần n = p, kết quả m×q.',
+ parts:[MX('i) 2A', [[2,2],[-4,10]], '2 2; −4 10'), IMP('ii) A + B'), MX('iii) BF', [[16,39],[-8,3],[8,15]], '16 39; −8 3; 8 15'), MX('iv) CD', [[-2]], '−2'), MX('v) DC', [[6,0,12],[2,0,4],[-4,0,-8]], '6 0 12; 2 0 4; −4 0 −8'), IMP('vi) B − A'), IMP('vii) E + F'), MX('viii) AE', [[3,-4,10,-1,5],[8,15,-6,-12,25]], '3 −4 10 −1 5; 8 15 −6 −12 25'), IMP('ix) ED'), MX('x) F²', [[28,30],[20,33]], '28 30; 20 33'), MX('xi) A⁻¹', [[5/7,-1/7],[2/7,1/7]], '5/7 −1/7; 2/7 1/7')],
+ sol:'<p>A là 2×2, B là 3×2, C là 1×3, D là 3×1, E là 2×5, F là 2×2. A + B và B − A khác kích thước. E + F khác kích thước. ED: E có 5 cột nhưng D có 3 hàng. A⁻¹: det A = 1×5 − 1×(−2) = 7, nên A⁻¹ = (1/7)(5 −1; 2 1).</p>'},
+{n:3, p:'Rectangle R has corners P(1,1), Q(5,1), R(5,2), S(1,2). Find its position after each transformation (start from R each time). W = (0 1; 1 0), V = (0 −1; 1 0), U = (−2 0; 0 −2), translation m = (−3, 2). Then with F = (−1 0; 0 1) form FV, apply it to R and comment.', hint:'Nhân ma trận với từng điểm (x, y) viết dạng cột. Phép tịnh tiến thì cộng vectơ.',
+ parts:[{t:'pts', l:'W(R): P, Q, R, S', a:[[1,1],[1,5],[2,5],[2,1]], s:'(1,1), (1,5), (2,5), (2,1)', ph:'(x,y), (x,y), (x,y), (x,y)'}, {t:'pts', l:'V(R)', a:[[-1,1],[-1,5],[-2,5],[-2,1]], s:'(−1,1), (−1,5), (−2,5), (−2,1)', ph:'(x,y), ...'}, {t:'pts', l:'U(R)', a:[[-2,-2],[-10,-2],[-10,-4],[-2,-4]], s:'(−2,−2), (−10,−2), (−10,−4), (−2,−4)', ph:'(x,y), ...'}, {t:'pts', l:'R + m', a:[[-2,3],[2,3],[2,4],[-2,4]], s:'(−2,3), (2,3), (2,4), (−2,4)', ph:'(x,y), ...'},
+  MX('FV', [[0,1],[1,0]], '0 1; 1 0'), O('Describe each effect and comment on FV', 'W: phản xạ qua đường y = x. V: quay 90° ngược chiều kim đồng hồ quanh O. U: phóng to hệ số −2 (gấp đôi và quay 180°). m: dời 3 sang trái, 2 lên trên. FV = W: quay 90° rồi phản xạ qua trục y cho cùng kết quả với phản xạ qua y = x.')],
+ sol:'<div class="figs"><figure>' + G.plot({xr:[-11,6], yr:[-5,6], xs:2, ys:2, polys:[{p:[[1,1],[5,1],[5,2],[1,2]], c:4, t:'R'}, {p:[[1,1],[1,5],[2,5],[2,1]], c:0, t:'W'}, {p:[[-1,1],[-1,5],[-2,5],[-2,1]], c:1, t:'V'}, {p:[[-2,-2],[-10,-2],[-10,-4],[-2,-4]], c:2, t:'U'}, {p:[[-2,3],[2,3],[2,4],[-2,4]], c:3, t:'+m'}]}) + '</figure></div>'},
+{n:4, p:'Solve the simultaneous equations using matrices: (i) 2x + 3y = 8, x + 4y = 9; (ii) 4x − y = 21, −10x + 3y = −53; (iii) 5x + y = 23, 3x + y = 15.', hint:'Viết dạng AX = B rồi X = A⁻¹B. Với ma trận 2×2 (a b; c d), A⁻¹ = (1/(ad − bc))(d −b; −c a).',
+ parts:[N('(i) x', 1), N('(i) y', 2), N('(ii) x', 5), N('(ii) y', -1), N('(iii) x', 4), N('(iii) y', 3)],
+ sol:'<p>(i) det = 2×4 − 3×1 = 5. X = (1/5)(4 −3; −1 2)(8; 9) = (1/5)(5; 10) = (1; 2). (ii) det = 12 − 10 = 2, X = (1/2)(3 1; 10 4)(21; −53) = (5; −1). (iii) det = 2, X = (4; 3).</p>'},
+{n:5, p:'Let q = (0 −1; 1 0). Construct a multiplication table using q as the starting element and show it is closed. Use the labels I, q, q², q³ (q² = −I, q³ = −q).', hint:'Tính q² và q³ trước. q⁴ = I, nên qᵃ × qᵇ = q^((a + b) mod 4).',
+ parts:[GRID('× table', ['×','I','q','q²','q³'], [['I'].concat([0,1,2,3].map(Q)), ['q'].concat([1,2,3,0].map(Q)), ['q²'].concat([2,3,0,1].map(Q)), ['q³'].concat([3,0,1,2].map(Q))])],
+ sol:'<p>q² = (−1 0; 0 −1) = −I, q³ = (0 1; −1 0), q⁴ = I. Bảng chỉ chứa 4 ma trận này nên tập {I, q, q², q³} đóng với phép nhân.</p>'}
+]});
+function Q(k){ var acc = [['i','q0','q^0','e','q⁴','q4'], ['q','q1','q^1'], ['q²','q2','q^2','-i'], ['q³','q3','q^3','-q']]; return {a:acc[k], s:['I','q','q²','q³'][k]}; }
+/* ================= 9: GRAPH THEORY ================= */
+var G1E = 'ab ae af bc bf ce de ef';
+var G1N = {a:[40,40], b:[150,28], c:[262,60], d:[262,186], e:[150,170], f:[50,160]};
+var G1L = G1E.split(' ').map(function(e){ return [e[0], e[1]]; });
+function inG1(e){ return G1E.split(' ').indexOf(ekey(e[0], e[1])) >= 0; }
+function spanCheck(verts, edgeSetStr, weights, minW){
+  return function(raw){
+    var E = parseEdges(raw);
+    if (!E.length) return {ok:false, msg:'Nhập các cạnh, ví dụ ab, bc, ...'};
+    var allowed = edgeSetStr.split(' ');
+    for (var i = 0; i < E.length; i++) if (allowed.indexOf(ekey(E[i][0], E[i][1])) < 0) return {ok:false, msg:'Cạnh ' + E[i].join('') + ' không có trong đồ thị.'};
+    if (E.length !== verts.length - 1) return {ok:false, msg:'Cây khung trên ' + verts.length + ' đỉnh có đúng ' + (verts.length - 1) + ' cạnh.'};
+    var cc = connectedCount(verts, E);
+    if (cc.cycle || cc.parts !== 1) return {ok:false, msg:'Tập cạnh này có chu trình hoặc không nối hết các đỉnh.'};
+    if (weights){ var w = E.reduce(function(s, e){ return s + weights[ekey(e[0], e[1])]; }, 0); if (w !== minW) return {ok:false, msg:'Đây là cây khung, nhưng tổng trọng số là ' + w + ', chưa nhỏ nhất.'}; }
+    return {ok:true};
+  };
+}
+var W7 = {ab:9, bc:4, ac:11, af:8, be:7, ce:3, cd:2, ef:5, de:4};
+var W8 = {ab:52, ac:37, ad:16, bc:23, bd:12, be:15, ce:10, de:12};
+function noneCell(v){ return v == null ? {a:['-','none','null','x','—','∅','no','không'], s:'-', empty:true} : {a:[String(v)], s:String(v)}; }
+function bstRows(t, order){ return order.map(function(n){ return [String(n), noneCell(t[n][0]), noneCell(t[n][1])]; }); }
+var T9 = {23:[15,43], 43:[37,46], 15:[12,18], 37:[25,null], 25:[null,null], 46:[null,67], 67:[null,null], 12:[null,null], 18:[null,null]};
+var T10 = {find:['a','search'], a:[null,'binary'], binary:['as',null], search:['for','tree'], tree:['the','words'], 'for':[null,'in'], the:['sentence','this'], words:['use',null], 'in':[null,'root'], 'this':[null,null], sentence:[null,null], use:[null,null], as:[null,null], root:[null,null]};
+
+CH.push({no:9, title:'Graph Theory and Networks', vi:'Lý thuyết đồ thị và mạng', intro:'Walk nhập dãy đỉnh như a, f, e. Tập cạnh nhập như ab, bc, ce hoặc (a,b), (b,c).', qs:[
+{n:1, p:'Draw the graph with vertices a, b, c, d, e, f and edges (a,b), (a,e), (a,f), (b,c), (b,f), (c,e), (d,e), (e,f). Find one walk of length 2 and two walks of length 3 from a to e. Are any of these paths? Find a cycle.', fig: G.graph(G1N, G1L), hint:'Độ dài walk = số cạnh đi qua. Path không lặp đỉnh. Cycle là walk khép kín, không lặp đỉnh (trừ điểm đầu/cuối), có ít nhất 3 cạnh.',
+ parts:[WALK('Walk of length 2 (a to e)', G1E, 'a', 'e', 2, 'a, f, e'), WALK('Walk of length 3 (a to e)', G1E, 'a', 'e', 3, 'a, b, c, e'), WALK('Another walk of length 3', G1E, 'a', 'e', 3, 'a, b, f, e'), O('Are any of these paths?', 'a-f-e, a-b-c-e và a-b-f-e đều là path vì không đỉnh nào lặp lại. Walk như a-e-a-e có độ dài 3 nhưng không phải path.'),
+  FN('A cycle', function(raw){ var w = parseWalk(raw); if (w.length < 4 || w[0] !== w[w.length - 1]) return {ok:false, msg:'Cycle phải quay về đỉnh xuất phát và có ít nhất 3 cạnh, ví dụ a, b, f, a.'}; var inner = w.slice(0, -1); if (inner.some(function(v, i){ return inner.indexOf(v) !== i; })) return {ok:false, msg:'Cycle không được lặp đỉnh.'}; for (var i = 0; i < w.length - 1; i++) if (!inG1([w[i], w[i + 1]])) return {ok:false, msg:'Không có cạnh ' + w[i] + w[i + 1] + '.'}; return {ok:true}; }, 'a, b, f, a', 'VD: a, b, f, a')]},
+{n:2, p:'Draw a graph which has 6 vertices, is not connected and has a cycle of length 4. Enter its edges using vertices a to f (isolated vertices need not be listed).', hint:'Một hình vuông a-b-c-d-a, còn e và f đứng riêng là đủ.',
+ parts:[FN('Edges', function(raw){ var E = parseEdges(raw), V = 'abcdef'.split(''); if (E.some(function(e){ return V.indexOf(e[0]) < 0 || V.indexOf(e[1]) < 0 || e[0] === e[1]; })) return {ok:false, msg:'Chỉ dùng các đỉnh a đến f, không dùng khuyên.'}; if (connectedCount(V, E).parts < 2) return {ok:false, msg:'Đồ thị này liên thông, cần tách rời.'}; var S = {}; E.forEach(function(e){ S[ekey(e[0], e[1])] = 1; }); function h(x, y){ return S[ekey(x, y)]; } for (var i = 0; i < 6; i++) for (var j = 0; j < 6; j++) for (var k = 0; k < 6; k++) for (var l = 0; l < 6; l++){ var q = [V[i], V[j], V[k], V[l]]; if (i === j || i === k || i === l || j === k || j === l || k === l) continue; if (h(q[0], q[1]) && h(q[1], q[2]) && h(q[2], q[3]) && h(q[3], q[0])) return {ok:true}; } return {ok:false, msg:'Chưa tìm thấy chu trình độ dài 4.'}; }, 'ab, bc, cd, da (e và f cô lập)', 'VD: ab, bc, cd, da')].map(function(x){ x.ex = 'ab, bc, cd, da'; return x; })},
+{n:3, p:'Draw all trees which have 4 vertices, then all trees which have 5 vertices (no isomorphisms).', hint:'Phân loại theo bậc lớn nhất của một đỉnh.',
+ parts:[N('Number of trees with 4 vertices', 2), N('Number of trees with 5 vertices', 3)],
+ sol:'<div class="figs"><figure>' + G.graph({a:[20,30], b:[70,30], c:[120,30], d:[170,30]}, [['a','b'],['b','c'],['c','d']], {w:190, h:60}) + '<figcaption>4 đỉnh: đường thẳng</figcaption></figure><figure>' + G.graph({a:[60,20], b:[20,60], c:[60,60], d:[100,60]}, [['a','b'],['a','c'],['a','d']], {w:120, h:80}) + '<figcaption>4 đỉnh: hình sao</figcaption></figure></div><div class="figs"><figure>' + G.graph({a:[20,30], b:[65,30], c:[110,30], d:[155,30], e:[200,30]}, [['a','b'],['b','c'],['c','d'],['d','e']], {w:220, h:60}) + '<figcaption>5 đỉnh: đường thẳng</figcaption></figure><figure>' + G.graph({a:[80,20], b:[20,70], c:[60,70], d:[100,70], e:[140,70]}, [['a','b'],['a','c'],['a','d'],['a','e']], {w:160, h:90}) + '<figcaption>5 đỉnh: hình sao</figcaption></figure><figure>' + G.graph({a:[20,30], b:[65,30], c:[110,30], d:[155,30], e:[110,75]}, [['a','b'],['b','c'],['c','d'],['c','e']], {w:175, h:95}) + '<figcaption>5 đỉnh: một đỉnh bậc 3</figcaption></figure></div>'},
+{n:4, p:'Find two spanning trees for the graph in question 1.', fig: G.graph(G1N, G1L), hint:'Cây khung giữ đủ 6 đỉnh, dùng đúng 5 cạnh và không có chu trình.',
+ parts:[FN('Spanning tree 1', spanCheck('abcdef'.split(''), G1E), 'ab, bc, ce, de, ef', 'VD: ab, bc, ...'), FN('Spanning tree 2', spanCheck('abcdef'.split(''), G1E), 'ae, af, bf, ce, de', 'VD: ae, af, ...')]},
+{n:5, p:'Write down the adjacency matrix for the graph in question 1 (order a, b, c, d, e, f).', hint:'Ô (i, j) bằng 1 nếu có cạnh nối đỉnh i với đỉnh j. Đồ thị vô hướng nên ma trận đối xứng.',
+ parts:[MX('Adjacency matrix', [[0,1,0,0,1,1],[1,0,1,0,0,1],[0,1,0,0,1,0],[0,0,0,0,1,0],[1,0,1,1,0,1],[1,1,0,0,1,0]], '0 1 0 0 1 1; 1 0 1 0 0 1; 0 1 0 0 1 0; 0 0 0 0 1 0; 1 0 1 1 0 1; 1 1 0 0 1 0')]},
+{n:6, p:'A graph G with vertices v₁, v₂, v₃, v₄ has adjacency matrix A = (0 1 1 0; 1 0 0 0; 1 0 0 1; 0 0 1 0). Draw G. Find the number of walks of length 2 and 3 between v₁ and v₃ and identify them.', hint:'Số walk độ dài k từ vᵢ tới vⱼ là phần tử (i, j) của Aᵏ.',
+ parts:[N('Walks of length 2 (v₁ to v₃)', 0), N('Walks of length 3 (v₁ to v₃)', 3), O('Identify the walks', 'v₁ v₂ v₁ v₃, v₁ v₃ v₁ v₃, v₁ v₃ v₄ v₃.')],
+ sol:'<div class="figs"><figure>' + G.graph({v2:[30,40], v1:[110,40], v3:[190,40], v4:[270,40]}, [['v1','v2'],['v1','v3'],['v3','v4']], {w:300, h:80}) + '</figure></div><p>G là đường v₂ v₁ v₃ v₄. (A²)₁₃ = 0, (A³)₁₃ = 3.</p>'},
+{n:7, p:'Find a minimum spanning tree for the weighted graph and its length.', fig: G.graph({a:[40,70], b:[150,20], c:[262,80], d:[282,196], e:[160,190], f:[46,186]}, [['a','b',9],['b','c',4],['a','c',11],['a','f',8],['b','e',7],['c','e',3],['c','d',2],['f','e',5],['e','d',4]]), hint:'Kruskal: sắp cạnh tăng dần theo trọng số, lần lượt chọn cạnh không tạo chu trình cho đến khi đủ 5 cạnh.',
+ parts:[FN('MST edges', spanCheck('abcdef'.split(''), 'ab bc ac af be ce cd ef de', W7, 22), 'cd, ce, bc, ef, af', 'VD: cd, ce, ...'), N('Total length', 22)],
+ sol:'<p>Thứ tự: cd 2 (chọn), ce 3 (chọn), bc 4 (chọn), de 4 (bỏ, tạo chu trình c-d-e), ef 5 (chọn), be 7 (bỏ), af 8 (chọn). Tổng 2 + 3 + 4 + 5 + 8 = 22.</p>' + '<div class="figs"><figure>' + G.graph({a:[40,70], b:[150,20], c:[262,80], d:[282,196], e:[160,190], f:[46,186]}, [['a','b',9],['b','c',4],['a','c',11],['a','f',8],['b','e',7],['c','e',3],['c','d',2],['f','e',5],['e','d',4]], {hl:['cd','ce','bc','ef','af']}) + '</figure></div>'},
+{n:8, p:'Five computers A to E are to be connected. Costs: AB 52, AC 37, AD 16, BC 23, BD 12, BE 15, CE 10, DE 12. (i) Use Kruskal’s algorithm to find a minimum spanning tree. (ii) Find the minimum cost. (iii) If A must be connected to B, what difference does this make?', hint:'(iii) Bắt buộc lấy cạnh AB trước, rồi chạy Kruskal tiếp với các cạnh còn lại.',
+ parts:[FN('(i) MST edges', spanCheck('abcde'.split(''), 'ab ac ad bc bd be ce de', W8, 50), 'CE, BD, DE, AD', 'VD: ce, bd, ...'), N('(ii) Minimum cost', 50), N('(iii) Minimum cost with AB', 86)],
+ sol:'<p>(i) CE 10, BD 12, DE 12 chọn; BE 15 bỏ (B và E đã nối qua D); AD 16 chọn. Tổng 50. (iii) Lấy AB 52, sau đó CE 10, BD 12, DE 12 là đủ nối 5 máy (AD lúc này tạo chu trình). Tổng 86, tức đắt hơn 36.</p>' + '<div class="figs"><figure>' + G.graph({A:[40,40], B:[200,40], C:[260,150], D:[120,190], E:[60,150]}, [['A','B',52],['A','C',37],['A','D',16],['B','C',23],['B','D',12],['B','E',15],['C','E',10],['D','E',12]], {hl:['CE','BD','DE','AD']}) + '</figure></div>'},
+{n:9, p:'Put the numbers 23, 43, 15, 37, 25, 46, 67, 12, 18 in a binary search tree with 23 as the root. Fill in the left and right child of each node ("-" for none).', hint:'Chèn theo đúng thứ tự cho trước. Nhỏ hơn đi trái, lớn hơn đi phải.',
+ parts:[GRID('Children', ['Node','Left','Right'], bstRows(T9, [23,15,43,12,18,37,46,25,67]))],
+ sol: G.tree(T9, 23)},
+{n:10, p:'Find a binary search tree for the words in this sentence: "Find a binary search tree for the words in this sentence. Use ‘find’ as the root." Fill in the children of each node (lower case, "-" for none).', hint:'So sánh theo thứ tự từ điển. Bỏ qua từ lặp lại (find, the).',
+ parts:[GRID('Children', ['Node','Left','Right'], bstRows(T10, ['find','a','binary','search','for','tree','in','the','words','as','root','sentence','this','use']))],
+ sol: G.tree(T10, 'find', {gap:52})},
+{n:11, p:'Using a binary tree evaluate (a → ¬b) ∨ ((¬c → a) ∧ b) when a and b are true and c is false.', hint:'Đánh giá từ lá lên gốc.',
+ parts:[TF('a → ¬b', false), TF('¬c → a', true), TF('(¬c → a) ∧ b', true), TF('Whole expression', true)]}
+]});
+
+/* ================= 10: ALGORITHMS ================= */
+CH.push({no:10, title:'Algorithms', vi:'Thuật toán', qs:[
+{n:1, p:'Inputs come from N, with r > 2. For each algorithm (i) draw the design, (ii) describe the output in words, (iii) perform it with two sets of inputs.', fig:'<div class="algos"><pre>Algorithm a\nREAD ← p, q\nIF p > q THEN\n  DISPLAY p\nELSE\n  DISPLAY q\nENDIF</pre><pre>Algorithm b\nREAD ← r\ni ← 2\nAnswer ← "true"\nDO\n  IF r mod i = 0 THEN\n    Answer ← "false"\n  ENDIF\n  i ← i + 1\nLOOP UNTIL i = r\nDISPLAY Answer</pre><pre>Algorithm c\nREAD ← p, n\ni ← 1\nAnswer ← 1\nDO\n  Answer ← Answer * p\n  i ← i + 1\nLOOP UNTIL i > n\nDISPLAY Answer</pre></div>', hint:'Chạy tay từng bước, ghi giá trị biến sau mỗi vòng lặp (trace table).',
+ parts:[CHO('(ii) Algorithm a', ['Displays the larger of p and q', 'Displays p + q', 'Displays the smaller of p and q'], 0), N('(iii) a with p = 7, q = 3', 7), N('(iii) a with p = 2, q = 9', 9),
+  CHO('(ii) Algorithm b', ['Displays "true" if r is even', 'Displays "true" if r is prime, otherwise "false"', 'Counts the divisors of r'], 1), X('(iii) b with r = 7', ['true'], 'true'), X('(iii) b with r = 9', ['false'], 'false'),
+  CHO('(ii) Algorithm c', ['Displays p × n', 'Displays n!', 'Displays pⁿ'], 2), N('(iii) c with p = 2, n = 5', 32), N('(iii) c with p = 3, n = 4', 81), O('(i) Designs', 'Vẽ lưu đồ: a là một nhánh IF; b là vòng lặp kiểm tra r mod i với i = 2 đến r − 1; c là vòng lặp nhân Answer với p đúng n lần.')]},
+{n:2, p:'Linear search compares each item in an ordered list with the required data. In the worst case (last item or not in the list), how many comparisons are there for a list of (i) 8 items, (ii) n items?', hint:'Ví dụ cho sẵn: danh sách 7 phần tử cần 7 phép so sánh.',
+ parts:[N('(i) 8 items', 8), X('(ii) n items', ['n'], 'n')]},
+{n:3, p:'Binary search repeatedly halves the list. Worst-case comparisons for lists of (i) 8, (ii) 9, (iii) 20, (iv) 56, (v) n items?', hint:'Ví dụ cho sẵn: 7 phần tử cần 3 lần. Mỗi lần so sánh, danh sách còn khoảng một nửa.',
+ parts:[N('(i) 8', 4), N('(ii) 9', 4), N('(iii) 20', 5), N('(iv) 56', 6), X('(v) n', ['⌊log₂n⌋+1','⌊log2n⌋+1','floor(log2n)+1','floor(log2(n))+1','⌊log2(n)⌋+1','⌊log₂(n)⌋+1','int(log2n)+1'], '⌊log₂ n⌋ + 1')],
+ sol:'<p>Số lần so sánh tệ nhất = ⌊log₂ n⌋ + 1. 8: ⌊3⌋ + 1 = 4. 9: ⌊3.17⌋ + 1 = 4. 20: ⌊4.32⌋ + 1 = 5. 56: ⌊5.81⌋ + 1 = 6.</p>'},
+{n:4, p:'State the big O for the linear search (Q2) and binary search (Q3).', hint:'Big O mô tả số bước tăng theo n như thế nào khi n lớn.',
+ parts:[X('Linear search', ['o(n)'], 'O(n)'), X('Binary search', ['o(logn)','o(log2n)','o(log₂n)','o(lgn)'], 'O(log n)')]},
+{n:5, p:'Turing machine T is defined by (s0,0,s1,1,R), (s0,1,s1,0,R), (s0,B,s1,0,R), (s1,0,s2,1,L), (s1,1,s1,0,R), (s1,B,s2,0,L). Starting at the leftmost non-blank cell in state s0, give the final tape when it halts.', hint:'Mỗi bộ năm là (trạng thái, ký hiệu đọc, trạng thái mới, ký hiệu ghi, hướng). Máy dừng ở s2 vì không có luật nào cho s2.',
+ parts:[TAPE('i) B B 0 0 1 1 B B', 'BB1111BB'), TAPE('ii) B B 1 0 1 B B B', 'BB011BBB'), TAPE('iii) B B 1 1 B 0 1 B', 'BB00001B')],
+ sol:'<p>(i) s0 đọc 0 → ghi 1, sang phải, s1. s1 đọc 0 → ghi 1, sang trái, s2: dừng. (iii) s0 đọc 1 → ghi 0, phải, s1. s1 đọc 1 → ghi 0, phải. s1 đọc B → ghi 0, trái, s2: dừng.</p>'}
+]});
+function TAPE(l, ans){
+  var core = ans.replace(/^B+|B+$/g, '');
+  return FN(l, function(raw){ var c = String(raw).toUpperCase().replace(/[^01B]/g, ''); return {ok: c.replace(/^B+|B+$/g, '') === core}; }, ans.split('').join(' '), 'VD: B B 1 0 1 B B B');
+}
+
+/* ================= 11: DATA AND STATISTICS ================= */
+var HGT = [176,187,152,170,195,158,175,169,190,155], WGT = [80,98,45,76,112,65,78,70,105,50];
+CH.push({no:11, title:'Data and Statistics', vi:'Dữ liệu và thống kê', intro:'Các câu vẽ biểu đồ có hình mẫu trong phần lời giải để bạn đối chiếu với Excel. Độ lệch chuẩn chấp nhận cả công thức chia n và chia n − 1.', qs:[
+{n:1, p:'Heights (cm) 176 187 152 170 195 158 175 169 190 155 and weights (kg) 80 98 45 76 112 65 78 70 105 50. Draw a scatter graph. Does it suggest a connection? Would this be expected?', hint:'Trong Excel: chọn hai cột, Insert → Scatter.',
+ parts:[CHO('Connection', ['Strong positive correlation: taller people tend to be heavier', 'Negative correlation', 'No clear connection'], 0), O('Expected?', 'Có, người cao hơn thường có khối xương và cơ lớn hơn. Hệ số tương quan r ≈ 0.99.')],
+ sol:'<div class="figs"><figure>' + G.plot({xr:[145,200], yr:[40,120], xs:10, ys:20, pts:HGT.map(function(h, i){ return [h, WGT[i]]; }), xl:'Height (cm)', yl:'kg'}) + '</figure></div>'},
+{n:2, p:'Draw a line graph of average London temperature: Jan 7, Feb 7, Mar 9, Apr 11, May 14, Jun 16, Jul 19, Aug 19, Sep 17, Oct 13, Nov 10, Dec 7 (°C).', hint:'Insert → Line chart, trục ngang là tháng.',
+ parts:[O('Line graph', 'Đường tăng từ 7°C tháng 1 lên đỉnh 19°C tháng 7 và 8, rồi giảm về 7°C tháng 12.')],
+ sol:'<div class="figs"><figure>' + G.plot({xr:[1,12], yr:[0,20], xs:1, ys:5, lines:[{p:[7,7,9,11,14,16,19,19,17,13,10,7].map(function(v, i){ return [i + 1, v]; }), dots:true}], xfmt:function(m){ return 'JFMAMJJASOND'[m - 1]; }, yl:'°C'}) + '</figure></div>'},
+{n:3, p:'Draw a bar chart of the Computer Society election votes: Adam 17, Bilal 24, Charlotte 22, Deborah 13, Evgeniya 18.', hint:'Insert → Column chart.',
+ parts:[O('Bar chart', 'Bilal thắng với 24 phiếu, sau đó Charlotte 22.')], sol:'<div class="figs"><figure>' + G.bars(['Adam','Bilal','Charlotte','Deborah','Evgeniya'], [17,24,22,13,18]) + '</figure></div>'},
+{n:4, p:'Draw a pie chart of predicted Premier League winners: Chelsea 35%, Manchester City 25%, Manchester United 15%, Arsenal 10%, Tottenham Hotspur 10%, Others 5%.', hint:'Mỗi 1% ứng với 3.6°.',
+ parts:[O('Pie chart', 'Chelsea chiếm 126°, Man City 90°, Man United 54°, Arsenal và Tottenham mỗi đội 36°, Others 18°.')], sol:'<div class="figs"><figure>' + G.pie(['Chelsea','Man City','Man United','Arsenal','Tottenham','Others'], [35,25,15,10,10,5]) + '</figure></div>'},
+{n:5, p:'You got 48% in Mathematics and 65% in Computer Programming. Which should please you more? What statistics would help you decide?', hint:'So sánh vị trí của bạn so với cả lớp ở từng môn, không chỉ điểm thô.',
+ parts:[O('Your reasoning', 'Cần điểm trung bình và độ lệch chuẩn (hoặc trung vị và các tứ phân vị) của mỗi bài thi. Tính z = (điểm − trung bình)/độ lệch chuẩn cho từng môn; môn có z cao hơn là kết quả tốt hơn so với bạn cùng lớp. Ví dụ nếu toán có trung bình 35, SD 8 thì 48% là z ≈ 1.6, rất tốt.')]},
+{n:6, p:'The company removes the worst 10% under its productivity measure. Your measure is 5.7. Is it better for you if (a) the average is 7 and the standard deviation 1.5, or (b) the average is 6 and the standard deviation 0.1? Assume a roughly normal distribution.', hint:'10% thấp nhất của phân phối chuẩn nằm dưới z ≈ −1.28.',
+ parts:[CHO('Better for you', ['(a) mean 7, SD 1.5', '(b) mean 6, SD 0.1'], 0)],
+ sol:'<p>(a) z = (5.7 − 7)/1.5 ≈ −0.87, cao hơn −1.28, nên an toàn (ngưỡng ≈ 7 − 1.28 × 1.5 = 5.08). (b) z = (5.7 − 6)/0.1 = −3, nằm sâu trong 10% thấp nhất (ngưỡng ≈ 5.87), bị loại.</p>'},
+{n:7, p:'Number of children in 50 families: 4 5 2 2 3 4 4 3 5 4 / 7 3 3 4 2 2 2 2 2 6 / 3 2 3 3 1 2 3 2 2 6 / 5 5 3 2 4 4 2 4 1 2 / 2 2 1 3 3 2 2 4 5 3. Construct the frequency distribution, draw a bar chart and pie chart, and calculate the mean and mode.', hint:'Excel: =COUNTIF(range, 1) cho từng giá trị; =AVERAGE(range); =MODE(range).',
+ parts:[GRID('Frequency', ['Children','1','2','3','4','5','6','7'], [['Families'].concat([3,18,12,9,5,2,1].map(function(v){ return {a:[String(v)], s:String(v)}; }))]), N('Mean', 3.1), N('Mode', 2)],
+ sol:'<p>Σfx = 3 + 36 + 36 + 36 + 25 + 12 + 7 = 155, mean = 155/50 = 3.1. Mode = 2 (18 gia đình).</p><div class="figs"><figure>' + G.bars(['1','2','3','4','5','6','7'], [3,18,12,9,5,2,1]) + '</figure><figure>' + G.pie(['1','2','3','4','5','6','7'], [3,18,12,9,5,2,1]) + '</figure></div>'},
+{n:8, p:'Class test marks: 5 10 25 25 25 30 30 30 35 35. Find the mean, median and mode.', hint:'10 giá trị nên trung vị là trung bình của giá trị thứ 5 và thứ 6.',
+ parts:[N('Mean', 25), N('Median', 27.5), S('Mode(s)', [25,30], '25 và 30 (bimodal)', {numeric:true})]},
+{n:9, p:'Lives of 120 circuit components (hours): 660-669: 3, 670-679: 10, 680-689: 16, 690-699: 23, 700-709: 34, 710-719: 21, 720-729: 9, 730-739: 4. State class intervals and marks, construct the cumulative frequency, estimate the median and the inter-quartile range.', hint:'Biên lớp là 659.5, 669.5, ... Trung vị ở vị trí 60, Q1 ở 30, Q3 ở 90. Nội suy tuyến tính trong lớp chứa vị trí đó.',
+ parts:[GRID('Cumulative frequency', ['Upper boundary','669.5','679.5','689.5','699.5','709.5','719.5','729.5','739.5'], [['Cum. freq'].concat([3,13,29,52,86,107,116,120].map(function(v){ return {a:[String(v)], s:String(v)}; }))]), N('Median (hours)', 701.9, '≈ 701.9', {tol:1}), N('Lower quartile', 689.9, '≈ 689.9', {tol:1.2}), N('Upper quartile', 711.4, '≈ 711.4', {tol:1.2}), N('IQR', 21.5, '≈ 21.5', {tol:2}), O('Class intervals and class marks', 'Khoảng lớp 659.5-669.5, 669.5-679.5, ...; class mark (điểm giữa) 664.5, 674.5, 684.5, 694.5, 704.5, 714.5, 724.5, 734.5.')],
+ sol:'<p>Median = 699.5 + (60 − 52)/34 × 10 ≈ 701.9. Q1 = 689.5 + (30 − 29)/23 × 10 ≈ 689.9. Q3 = 709.5 + (90 − 86)/21 × 10 ≈ 711.4. Đọc từ đồ thị thì chênh lệch nhỏ là bình thường.</p><div class="figs"><figure>' + G.plot({xr:[659.5,739.5], yr:[0,120], xs:10, ys:20, lines:[{p:[[659.5,0],[669.5,3],[679.5,13],[689.5,29],[699.5,52],[709.5,86],[719.5,107],[729.5,116],[739.5,120]], dots:true}], xfmt:function(x){ return Math.round(x); }, xl:'hours'}) + '</figure></div>'},
+{n:10, p:'A zoologist weighs 100 eggs: 24-29 g: 11, 30-35: 23, 36-41: 36, 42-47: 21, 48-53: 9. Give the class marks and find the mean and standard deviation to 2 decimal places.', hint:'Class mark = trung điểm, ví dụ (24 + 29)/2 = 26.5. Dùng σ = √(Σfx²/n − x̄²).',
+ parts:[S('Class marks', [26.5,32.5,38.5,44.5,50.5], null, {numeric:true}), N('Mean', 38.14, '38.14', {tol:0.01}), N('Standard deviation', 6.67, '6.67 (chia n), 6.71 (chia n − 1)', {tol:0.05})]},
+{n:11, p:'Three groups sit a test (marks out of 50). Class intervals 11-15 to 41-45. A: 5, 15, 10, 0, 0, 0, 0. B: 2, 10, 10, 5, 3, 0, 0. C: 1, 2, 5, 10, 10, 1, 1. Calculate the mean and standard deviation of each group and compare.', hint:'Class marks 13, 18, 23, 28, 33, 38, 43. Excel: =SUMPRODUCT(f, x)/SUM(f).',
+ parts:[N('A mean', 18.83, '18.83', {tol:0.01}), N('A SD', 3.44, '3.44', {tol:0.06}), N('B mean', 22.5), N('B SD', 5.38, '5.38', {tol:0.1}), N('C mean', 28.5), N('C SD', 6.10, '6.10', {tol:0.12}), O('Compare', 'C có điểm trung bình cao nhất nhưng phân tán nhất; A thấp nhất và đồng đều nhất.')]},
+{n:12, p:'Copy the 100 values into Excel. Use the Data Analysis tool to form a histogram with suitable classes, then draw a frequency polygon.', hint:'Chọn bins 10, 20, ..., 100 (lớp 1-10, 11-20, ...). Frequency polygon nối trung điểm đỉnh các cột.',
+ parts:[O('Histogram and polygon', 'Với lớp 1-10, ..., 91-100 tần số là 8, 9, 13, 8, 10, 12, 10, 11, 11, 8. Phân phối gần đều (uniform).')],
+ sol:'<div class="figs"><figure>' + G.plot({xr:[0,100], yr:[0,15], xs:10, ys:5, bars:[8,9,13,8,10,12,10,11,11,8].map(function(v, i){ return {x:5.5 + i*10, y:v, w:10}; }), lines:[{p:[[-4.5,0]].concat([8,9,13,8,10,12,10,11,11,8].map(function(v, i){ return [5.5 + i*10, v]; })).concat([[105.5,0]]).filter(function(q){ return q[0] >= 0 && q[0] <= 100; }), dots:true, c:1}]}) + '</figure></div>'},
+{n:13, p:'What is wrong with these statements? "In Lake Woebegone all the children are above average." "We don’t stock that size as there’s no demand for it." "If his average was 2 marks more he would have passed, if only he had got 40 for his project rather than 38."', hint:'Nghĩ về định nghĩa trung bình, vòng lặp nhân quả, và việc tăng một điểm thành phần ảnh hưởng thế nào tới trung bình.',
+ parts:[O('Your answer', '(1) Không thể mọi phần tử đều trên trung bình của chính nhóm đó. (2) Lập luận vòng: không có hàng thì không bán được, nên không có dữ liệu "nhu cầu". (3) Tăng 2 điểm ở một thành phần chỉ làm trung bình tăng một phần của 2 điểm (trừ khi chỉ có một thành phần).')]}
+]});
+
+/* ================= 12: PROBABILITY ================= */
+CH.push({no:12, title:'Probability', vi:'Xác suất', intro:'Nhập xác suất dạng phân số (5/26) hoặc thập phân.', qs:[
+{n:1, p:'What is the probability of choosing a vowel from the alphabet?', hint:'5 nguyên âm trong 26 chữ.', parts:[N('P', 5/26, '5/26', {tol:1e-4})]},
+{n:2, p:'A number from 1 to 11 is chosen at random. What is the probability of choosing an odd number?', hint:'Đếm 1, 3, 5, ..., 11.', parts:[N('P', 6/11, '6/11', {tol:1e-4})]},
+{n:3, p:'A class has 17 boys and 13 girls. 4 boys and 5 girls got an A. What is the probability of choosing a girl or an A student?', hint:'P(G ∪ A) = P(G) + P(A) − P(G ∩ A).', parts:[N('P', 17/30, '17/30', {tol:1e-4})], sol:'<p>13/30 + 9/30 − 5/30 = 17/30.</p>'},
+{n:4, p:'After throwing a dice, what is the probability that the number shown is divisible by 3?', hint:'Chỉ có 3 và 6.', parts:[N('P', 1/3, '1/3', {tol:1e-4})]},
+{n:5, p:'A loaded dice has P(1) = 0.1, P(2) = 0.2, P(3) = 0.1, P(4) = 0.2, P(5) = 0.1, P(6) = 0.3. Is an even number or a number greater than 3 more probable?', hint:'Cộng xác suất của các mặt tương ứng.',
+ parts:[N('P(even)', 0.7), N('P(> 3)', 0.6), CHO('More probable', ['Even', 'Greater than 3', 'Equal'], 0)]},
+{n:6, p:'A fair coin is tossed three times. (i) P(at least two consecutive heads)? (ii) P(exactly two heads)?', hint:'Liệt kê 8 kết quả HHH, HHT, ..., TTT.',
+ parts:[N('(i)', 3/8, '3/8'), N('(ii)', 3/8, '3/8')], sol:'<p>(i) HHH, HHT, THH. (ii) HHT, HTH, THH.</p>'},
+{n:7, p:'On New Year’s Eve P(car accident) = 0.09, P(driving while intoxicated) = 0.32, P(accident while intoxicated) = 0.15. What is the probability of driving while intoxicated or having an accident?', hint:'P(I ∪ A) = P(I) + P(A) − P(I ∩ A).',
+ parts:[N('P', 0.26)], sol:'<p>0.32 + 0.09 − 0.15 = 0.26. Lưu ý: số liệu của đề không nhất quán, vì P(I ∩ A) = 0.15 lớn hơn P(A) = 0.09, điều không thể xảy ra. Đáp án 0.26 là theo cách đề muốn bạn áp dụng công thức.</p>'},
+{n:8, p:'A drawer holds one pair of socks of each colour: blue, brown, red, white, black. You choose a pair, replace it, then choose again. P(red both times)?', hint:'Hai lần độc lập vì có hoàn lại.', parts:[N('P', 1/25, '1/25')]},
+{n:9, p:'A jar has 3 red, 5 green, 2 blue and 6 yellow marbles. One is chosen, replaced, then a second is chosen. P(green then yellow)?', hint:'16 viên tất cả.', parts:[N('P', 15/128, '15/128', {tol:1e-5})], sol:'<p>5/16 × 6/16 = 30/256 = 15/128.</p>'},
+{n:10, p:'Three cards are chosen from a deck of 52 without replacement. P(3 aces)?', hint:'Sau mỗi lần rút, số át và tổng số lá đều giảm 1.', parts:[N('P', 1/5525, '1/5525', {tol:1e-7})], sol:'<p>4/52 × 3/51 × 2/50 = 24/132 600 = 1/5525.</p>'},
+{n:11, p:'Calculate using your calculator and Excel (FACT, PERMUT, COMBIN). Explain any errors or unexpected answers.', hint:'ⁿPᵣ = n!/(n − r)!, ⁿCᵣ = n!/(r!(n − r)!). Không thể chọn 8 từ 4 phần tử.',
+ parts:[N('6!', 720), N('12!', 479001600), N('0!', 1), {t:'str', impossible:true, l:'(−1)!', s:'Error: giai thừa không xác định cho số âm'}, N('⁶P₃', 120), N('⁷P₄', 840), N('⁶P₆', 720), {t:'str', impossible:true, l:'⁴P₈', s:'Error (#NUM!): r > n'}, N('⁶C₃', 20), N('⁷C₄', 35), N('⁶C₆', 1), N('⁴C₈', 0, '0 hoặc Error (#NUM!): r > n', {err:true})],
+ sol:'<p>0! = 1 theo quy ước. (−1)! không xác định. ⁴P₈ và ⁴C₈ không có nghĩa vì chọn 8 từ 4 phần tử; Excel báo #NUM!, một số máy tính trả về 0 cho ⁴C₈.</p>'},
+{n:12, p:'A Formula 1 race has 22 cars. (i) Qualifying eliminates the slowest 6 (order does not matter): in how many ways? (ii) The second part eliminates another 6 from the remaining 16. (iii) The remaining 10 are ordered by fastest time. (iv) In how many ways can the podium (1st, 2nd, 3rd in order) be formed?', hint:'Không quan tâm thứ tự: tổ hợp C. Có thứ tự: chỉnh hợp P hoặc giai thừa.',
+ parts:[N('(i) ²²C₆', 74613), N('(ii) ¹⁶C₆', 8008), N('(iii) 10!', 3628800), N('(iv) ²²P₃', 9240)]},
+{n:13, p:'Roll a die: a 1 wins immediately. Otherwise roll again: a 1 or 2 wins, anything else loses. Draw the probability tree. What is the probability of winning?', hint:'Thắng = thắng lần 1, hoặc thua lần 1 rồi thắng lần 2.',
+ parts:[N('P(win)', 4/9, '4/9', {tol:1e-4})], sol:'<p>1/6 + 5/6 × 2/6 = 6/36 + 10/36 = 16/36 = 4/9.</p>'},
+{n:14, p:'Expected value of: (i) a die with sides 1, 2, 3, 4, 4, 4; (ii) a die with sides 2, 4, 6, 8, 10, 12; (iii) the sum of two standard dice.', hint:'E(X) = Σ x P(x). Kỳ vọng của tổng bằng tổng các kỳ vọng.',
+ parts:[N('(i)', 3), N('(ii)', 7), N('(iii)', 7)], sol:'<p>(i) 18/6 = 3. (ii) 42/6 = 7. (iii) 3.5 + 3.5 = 7.</p>'},
+{n:15, p:'Five boxes contain £1, £10, £100, £1000 and £10 000. Your box has £1000. Take it, or reject it and open another box? Decide under each criterion.', hint:'Nếu đổi, bạn nhận ngẫu nhiên một trong 4 hộp còn lại: 1, 10, 100, 10 000.',
+ parts:[CHO('(i) Expected value', ['Keep £1000', 'Switch'], 1), CHO('(ii) Maximax', ['Keep £1000', 'Switch'], 1), CHO('(iii) Minimax (best worst case)', ['Keep £1000', 'Switch'], 0), CHO('(iv) Regret (minimax regret)', ['Keep £1000', 'Switch'], 1)],
+ sol:'<p>(i) E(đổi) = (1 + 10 + 100 + 10 000)/4 = 2527.75 &gt; 1000. (ii) Tốt nhất khi đổi là 10 000 &gt; 1000. (iii) Tệ nhất khi đổi là £1 &lt; 1000, nên giữ. (iv) Hối tiếc lớn nhất khi giữ là 10 000 − 1000 = 9000; khi đổi là 1000 − 1 = 999. Chọn hối tiếc nhỏ hơn: đổi.</p>'},
+{n:16, p:'The Monty Hall problem: three doors, one car and two goats. You choose a door; the host opens another door showing a goat. Should you switch or stay?', hint:'Lúc đầu bạn chọn đúng xe với xác suất 1/3. Người dẫn chương trình luôn mở cửa có dê.',
+ parts:[CHO('Best choice', ['Stay', 'Switch', 'It does not matter'], 1), N('P(win) if you switch', 2/3, '2/3', {tol:1e-4})],
+ sol:'<p>Nếu ban đầu chọn dê (xác suất 2/3), người dẫn buộc phải mở cửa dê còn lại, nên đổi chắc chắn được xe. Vậy đổi thắng với xác suất 2/3, giữ nguyên chỉ 1/3.</p>'}
+]});
+var FORMULAE = '<header class="chhead"><p class="eyebrow">Reference · workbook pages 60-69</p><h2>Formulae</h2><p class="vi">Công thức tra cứu nhanh</p></header>' +
+'<div class="fgrid">' +
+'<section class="fcard"><h3>Sets</h3><p>|A ∪ B| = |A| + |B| − |A ∩ B|</p><table class="ft"><tr><td>Commutative</td><td>A ∩ B = B ∩ A</td><td>A ∪ B = B ∪ A</td></tr><tr><td>Associative</td><td>A ∩ (B ∩ C) = (A ∩ B) ∩ C</td><td>A ∪ (B ∪ C) = (A ∪ B) ∪ C</td></tr><tr><td>Distributive</td><td>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</td><td>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</td></tr><tr><td>Identity</td><td>A ∩ U = A</td><td>A ∪ ∅ = A</td></tr><tr><td>Domination</td><td>A ∩ ∅ = ∅</td><td>A ∪ U = U</td></tr><tr><td>Idempotent</td><td>A ∩ A = A</td><td>A ∪ A = A</td></tr><tr><td>Complement</td><td>A ∩ A′ = ∅, U′ = ∅</td><td>A ∪ A′ = U, ∅′ = U</td></tr><tr><td>De Morgan</td><td>(A ∩ B)′ = A′ ∪ B′</td><td>(A ∪ B)′ = A′ ∩ B′</td></tr><tr><td>Involution</td><td colspan="2">(A′)′ = A</td></tr></table><p>A × B là tập mọi cặp có thứ tự (a, b) với a ∈ A, b ∈ B.</p></section>' +
+'<section class="fcard"><h3>Propositional logic</h3><table class="ft"><tr><td>Idempotent</td><td>p ∧ p ≡ p</td><td>p ∨ p ≡ p</td></tr><tr><td>Distributive</td><td>p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)</td><td>p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)</td></tr><tr><td>De Morgan</td><td>¬(p ∧ q) ≡ ¬p ∨ ¬q</td><td>¬(p ∨ q) ≡ ¬p ∧ ¬q</td></tr><tr><td>Identity</td><td>p ∧ f ≡ f, p ∧ t ≡ p</td><td>p ∨ t ≡ t, p ∨ f ≡ p</td></tr><tr><td>Complement</td><td>p ∧ ¬p ≡ f</td><td>p ∨ ¬p ≡ t</td></tr><tr><td>Involution</td><td colspan="2">¬¬p ≡ p</td></tr></table><p>p → q chỉ sai khi p = T và q = F. Argument p₁, ..., pₙ ⊢ q hợp lệ khi mọi dòng làm các tiền đề đúng cũng làm q đúng. ∀: for all, ∃: there exists.</p><p>Boolean: p ∧ q = P·Q = P ∩ Q; p ∨ q = P + Q = P ∪ Q; ¬p = P̄ = P′; f = 0 = ∅; t = 1 = U.</p></section>' +
+'<section class="fcard"><h3>Number</h3><p>N = {1, 2, 3, ...} ⊂ Z ⊂ Q ⊂ R.</p><p>pico 10⁻¹², nano 10⁻⁹, micro 10⁻⁶, milli 10⁻³, centi 10⁻², deci 10⁻¹, deca 10¹, hecto 10², kilo 10³, mega 10⁶, giga 10⁹, tera 10¹².</p><p><b>2’s complement X − Y:</b> đảo bit của Y, cộng 1, đệm cho cùng số chữ số với X, cộng vào X, bỏ bit 1 tràn bên trái.</p><p>Binary 0-1, octal 0-7 (nhóm 3 bit), hexadecimal 0-9, A-F (nhóm 4 bit).</p><p>Grammar G = {V<sub>T</sub>, V<sub>N</sub>, S, P}: terminals, non-terminals, start symbol, production rules.</p></section>' +
+'<section class="fcard"><h3>Data and statistics</h3><p>Mean x̄ = Σfx / Σf. Median: giá trị giữa của dữ liệu đã sắp xếp. Mode: giá trị xuất hiện nhiều nhất.</p><p>Range = max − min. IQR = UQ − LQ.</p><p>σ = √(Σ(x − x̄)²/n) = √(Σx²/n − x̄²). Dữ liệu nhóm: σ = √(Σfx²/n − x̄²).</p></section>' +
+'<section class="fcard"><h3>Trigonometry</h3><p>π rad = 180°. Arc = rθ. Sector = ½r²θ. Chord = 2r sin(θ/2). Minor segment = ½r²(θ − sin θ).</p><table class="ft"><tr><td>α</td><td>0</td><td>π/6</td><td>π/4</td><td>π/3</td><td>π/2</td></tr><tr><td>sin</td><td>0</td><td>1/2</td><td>1/√2</td><td>√3/2</td><td>1</td></tr><tr><td>cos</td><td>1</td><td>√3/2</td><td>1/√2</td><td>1/2</td><td>0</td></tr><tr><td>tan</td><td>0</td><td>1/√3</td><td>1</td><td>√3</td><td>∞</td></tr></table><p>CAST: góc phần tư I tất cả dương, II sin dương, III tan dương, IV cos dương.</p><p>sin²x + cos²x = 1; tan²x + 1 = sec²x; sin 2A = 2 sin A cos A; cos 2A = 1 − 2sin²A.</p><p>sin(A ± B) = sin A cos B ± cos A sin B; cos(A ± B) = cos A cos B ∓ sin A sin B.</p><p>Sine rule a/sin A = b/sin B = c/sin C. Cosine rule a² = b² + c² − 2bc cos A. Area = ½bc sin A.</p><p>y = a sin(ωt + α): amplitude a, period T = 2π/ω, frequency f = 1/T = ω/2π.</p></section>' +
+'</div>';
+var INTRO = '<header class="chhead"><p class="eyebrow">Tài liệu ôn tập · Revision material</p><h2>Ôn tập MATH1179</h2><p class="vi">Mathematics for Computer Science, University of Greenwich</p></header>' +
+'<div class="introbox">' +
+'<p class="lead">Đây là <b>tài liệu ôn tập</b> chuyển từ workbook MATH1179 (Dr Yvonne Fryer, September 2025) sang dạng web để luyện tập ngay trên trình duyệt. Bạn điền đáp án vào từng ô, bấm <b>Kiểm tra</b> để biết đúng sai, mở <b>Gợi ý</b> khi bí, và xem <b>Hiện đáp án</b> để đối chiếu lời giải.</p>' +
+'<p>Trang gồm 12 chương bám sát workbook gốc (Sets, Numbers, Algebra, Logic, Functions, Trigonometry, Pattern Matching, Vectors and Matrices, Graph Theory, Algorithms, Statistics, Probability) cùng một trang công thức tra cứu. Đề bài giữ nguyên tiếng Anh như workbook; gợi ý và lời giải viết bằng tiếng Việt.</p>' +
+'<div class="note"><b>Lưu ý.</b> Đây không phải tài liệu chính thức của trường và không thay thế workbook, bài giảng trên Moodle hay hướng dẫn của giảng viên. Đáp án và lời giải do người biên soạn tự làm nên có thể còn sai sót. Hãy dùng trang để tự luyện, không dùng để nộp bài hay chép đáp án.</div>' +
+'<h3>Cách học hiệu quả</h3><ol class="steps"><li>Chọn một chương ở cột bên trái, nên đi theo thứ tự tuần học trên lớp.</li><li>Tự làm từng câu trước khi mở gợi ý. Nhấn Enter hoặc bấm Kiểm tra để chấm cả câu.</li><li>Ý nào sai sẽ hiện lý do (sai định dạng, thiếu nghiệm, sai kích thước ma trận...). Sửa lại rồi kiểm tra tiếp.</li><li>Với câu vẽ hình hoặc trả lời bằng lời, mở đáp án mẫu rồi tự chấm bằng nút "Mình làm đúng".</li></ol>' +
+'<h3>Cách nhập đáp án</h3><div class="scroll"><table class="ft"><tr><td>Phân số, hỗn số</td><td>6/7 · 2 6/7</td></tr><tr><td>Lũy thừa của 10</td><td>4.62×10^16 · 4.62e16</td></tr><tr><td>Có π, căn</td><td>7π/6 · 7pi/6 · −1/√3</td></tr><tr><td>Tập hợp</td><td>{1, 3, 5} · ∅</td></tr><tr><td>Logic</td><td>¬p ∧ q · ~p &amp; q · p -&gt; q</td></tr><tr><td>Công thức</td><td>0.2(S − 6000)</td></tr><tr><td>Ma trận (theo hàng)</td><td>1 2; 3 4</td></tr><tr><td>Phép tính không làm được</td><td>impossible</td></tr><tr><td>Cạnh, walk trong đồ thị</td><td>ab, bc, ce · a, f, e</td></tr></table></div>' +
+'<p class="muted">Thanh <b>Ký hiệu</b> ở cuối trang chèn nhanh ∪ ∩ ∅ ∈ ¬ ∧ → π √ vào ô đang gõ. Tiến độ lưu ngay trong trình duyệt của bạn, không gửi đi đâu; mở bằng máy hoặc trình duyệt khác sẽ bắt đầu lại.</p>' +
+'<p class="muted">Đề bài thuộc bản quyền của University of Greenwich và được dùng ở đây cho mục đích ôn tập, phi thương mại.</p>' +
+'<p><a class="btn primary" href="#ch1">Bắt đầu với Chương 1: Sets →</a></p>' +
+'</div>';
+/* ===== UI ===== */
+(function(){
+  var KEY = 'math1179-workbook-v1';
+  var state = {a:{}, st:{}};
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && saved.a) state = saved; } catch (e) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  var $ = function(sel, root){ return (root || document).querySelector(sel); };
+  var $$ = function(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+
+  /* assign ids */
+  var PARTS = {};
+  CH.forEach(function(ch){ ch.qs.forEach(function(q, qi){ q.id = 'c' + ch.no + 'q' + qi; q.parts.forEach(function(p, pi){ p.id = q.id + 'p' + pi; PARTS[p.id] = p; }); }); });
+  function chParts(ch){ var a = []; ch.qs.forEach(function(q){ a = a.concat(q.parts); }); return a; }
+  function chDone(ch){ return chParts(ch).filter(function(p){ return state.st[p.id] === 'ok'; }).length; }
+
+  function cellOk(cell, v){ var L = low(v || ''); if (!L && cell.empty) return true; return cell.a.map(low).indexOf(L) >= 0; }
+  function gradePart(p){
+    if (p.t === 'grid'){
+      var all = true, any = false;
+      p.rows.forEach(function(row, r){ row.forEach(function(cell, c){ if (typeof cell === 'string') return; var id = p.id + 'r' + r + 'c' + c; var v = state.a[id] || ''; if (v) any = true; var ok = cellOk(cell, v); setCell(id, ok); if (!ok) all = false; }); });
+      return {ok: all, empty: !any};
+    }
+    if (p.t === 'open') return {ok:null};
+    return checkPart(p, state.a[p.id]);
+  }
+  function setCell(id, ok){ var el = document.getElementById(id); if (el){ el.classList.toggle('is-ok', ok); el.classList.toggle('is-bad', !ok); } }
+
+  /* ---------- render ---------- */
+  function partHTML(p){
+    var h = '<div class="part t-' + p.t + '" data-pid="' + p.id + '">';
+    h += '<div class="prow"><span class="plabel">' + p.l + '</span><span class="pfield">';
+    var v = state.a[p.id] || '';
+    if (p.t === 'tf' || p.t === 'choice'){
+      var opts = p.t === 'tf' ? [['T','True'],['F','False']] : p.opts.map(function(o, i){ return [String(i), o]; });
+      h += '<span class="seg" role="radiogroup">' + opts.map(function(o){ return '<button type="button" class="opt' + (v === o[0] ? ' on' : '') + '" data-val="' + o[0] + '" role="radio" aria-checked="' + (v === o[0]) + '">' + o[1] + '</button>'; }).join('') + '</span>';
+    } else if (p.t === 'open'){
+      h += '<textarea id="' + p.id + '" class="ans" rows="2" placeholder="' + esc(p.ph || 'Viết câu trả lời của bạn') + '">' + esc(v) + '</textarea>';
+    } else if (p.t === 'grid'){
+      h += '<span class="scroll"><table class="grid' + (p.tt ? ' tt' : '') + '"><thead><tr>' + p.head.map(function(x){ return '<th>' + x + '</th>'; }).join('') + '</tr></thead><tbody>';
+      p.rows.forEach(function(row, r){ h += '<tr>' + row.map(function(cell, c){ if (typeof cell === 'string') return '<td class="fix">' + cell + '</td>'; var id = p.id + 'r' + r + 'c' + c; return '<td><input id="' + id + '" class="cell" data-cell="1" autocomplete="off" spellcheck="false" value="' + esc(state.a[id] || '') + '" aria-label="' + esc(p.head[c] + ' hàng ' + (r + 1)) + '"></td>'; }).join('') + '</tr>'; });
+      h += '</tbody></table></span>';
+    } else {
+      var wide = /matrix|pairs|pts|fn|formula|logic|set|roots/.test(p.t) ? ' wide' : '';
+      h += '<input id="' + p.id + '" class="ans' + wide + '" autocomplete="off" spellcheck="false" value="' + esc(v) + '" placeholder="' + esc(p.ph || (p.t === 'set' ? '{a, b, c}' : '')) + '">';
+    }
+    h += '</span><span class="mark" aria-live="polite"></span></div>';
+    h += '<div class="pmsg" hidden></div>';
+    h += '<div class="pans" hidden><span>Đáp án:</span> ' + (p.t === 'grid' ? '<span class="scroll"><table class="grid mini"><tr>' + p.head.map(function(x){ return '<th>' + x + '</th>'; }).join('') + '</tr>' + p.rows.map(function(row){ return '<tr>' + row.map(function(c){ return '<td>' + (typeof c === 'string' ? c : c.s) + '</td>'; }).join('') + '</tr>'; }).join('') + '</table></span>' : esc(p.s)) + (p.t === 'open' ? '<span class="self">Bạn tự chấm: <button type="button" class="sm" data-self="ok">Mình làm đúng</button><button type="button" class="sm" data-self="bad">Chưa đúng</button></span>' : '') + '</div>';
+    return h + '</div>';
+  }
+  function qHTML(ch, q){
+    var h = q.sec ? '<h3 class="sec">' + q.sec + '</h3>' : '';
+    h += '<section class="q" id="' + q.id + '"><div class="qhead"><span class="qno">' + q.n + '</span><div class="qtext"><p>' + q.p + '</p>' + (q.fig ? '<div class="figs">' + q.fig + '</div>' : '') + '</div></div>';
+    h += '<div class="parts">' + q.parts.map(partHTML).join('') + '</div>';
+    h += '<div class="qact"><button type="button" class="btn primary" data-act="check">Kiểm tra</button><button type="button" class="btn" data-act="hint" aria-expanded="false">Gợi ý</button><button type="button" class="btn" data-act="sol" aria-expanded="false">Hiện đáp án</button><button type="button" class="btn ghost" data-act="clear">Làm lại</button><span class="qscore"></span></div>';
+    h += '<div class="hint" hidden><b>Gợi ý.</b> ' + q.hint + '</div>';
+    h += '<div class="sol" hidden>' + (q.sol || '') + '</div>';
+    return h + '</section>';
+  }
+  function tocHTML(cur){
+    return '<a href="#intro" class="toc-i' + (cur === 'intro' ? ' cur' : '') + '"' + (cur === 'intro' ? ' aria-current="page"' : '') + '><span class="tn">i</span><span class="tt">Giới thiệu</span><span class="tc"></span></a>' + CH.map(function(ch){ var t = chParts(ch).length, d = chDone(ch); return '<a href="#ch' + ch.no + '" class="toc-i' + (cur === 'ch' + ch.no ? ' cur' : '') + '"' + (cur === 'ch' + ch.no ? ' aria-current="page"' : '') + '><span class="tn">' + ch.no + '</span><span class="tt">' + ch.title + '</span><span class="tp"><i style="width:' + Math.round(100 * d / t) + '%"></i></span><span class="tc">' + d + '/' + t + '</span></a>'; }).join('') + '<a href="#formulae" class="toc-i' + (cur === 'formulae' ? ' cur' : '') + '"><span class="tn">ƒ</span><span class="tt">Formulae</span><span class="tc"></span></a>';
+  }
+  function updateTotals(){
+    var tot = 0, done = 0; CH.forEach(function(ch){ tot += chParts(ch).length; done += chDone(ch); });
+    $('#ovbar i').style.width = (100 * done / tot).toFixed(1) + '%';
+    $('#ovtxt').textContent = done + ' / ' + tot + ' ý đúng';
+    $('#toc').innerHTML = tocHTML(current);
+  }
+  var current = 'intro';
+  function render(){
+    var h = (location.hash || '').replace('#', '');
+    if (!/^ch(\d+)$|^formulae$|^intro$/.test(h) || (h.indexOf('ch') === 0 && !CH[+h.slice(2) - 1])) h = 'intro';
+    current = h;
+    var main = $('#main');
+    if (h === 'formulae'){ main.innerHTML = FORMULAE; }
+    else if (h === 'intro'){ main.innerHTML = INTRO; }
+    else {
+      var ch = CH[+h.slice(2) - 1];
+      var html = '<header class="chhead"><p class="eyebrow">Chapter ' + ch.no + ' · workbook MATH1179</p><h2>' + ch.title + '</h2><p class="vi">' + ch.vi + '</p>' + (ch.intro ? '<p class="intro">' + ch.intro + '</p>' : '') + '</header>';
+      html += ch.qs.map(function(q){ return qHTML(ch, q); }).join('');
+      var prev = CH[ch.no - 2], next = CH[ch.no];
+      html += '<nav class="pager">' + (prev ? '<a class="btn" href="#ch' + prev.no + '">← ' + prev.no + '. ' + prev.title + '</a>' : '<a class="btn" href="#intro">← Giới thiệu</a>') + (next ? '<a class="btn primary" href="#ch' + next.no + '">' + next.no + '. ' + next.title + ' →</a>' : '<a class="btn" href="#formulae">Formulae →</a>') + '</nav>';
+      main.innerHTML = html;
+      ch.qs.forEach(function(q){ restoreMarks(q); });
+    }
+    updateTotals();
+    window.scrollTo(0, 0);
+  }
+  function qOf(id){ var m = /^c(\d+)q(\d+)/.exec(id); return CH[+m[1] - 1].qs[+m[2]]; }
+  function showMark(p, res){
+    var el = document.querySelector('.part[data-pid="' + p.id + '"]'); if (!el) return;
+    var mk = $('.mark', el), msg = $('.pmsg', el);
+    el.classList.remove('ok', 'bad');
+    mk.textContent = '';
+    msg.hidden = true;
+    if (res == null) return;
+    if (res === 'ok' || res.ok === true){ el.classList.add('ok'); mk.textContent = '✓'; mk.setAttribute('aria-label', 'Đúng'); }
+    else if (res === 'bad' || res.ok === false){ el.classList.add('bad'); mk.textContent = res.empty ? '·' : '✗'; mk.setAttribute('aria-label', 'Chưa đúng'); if (res.msg){ msg.textContent = res.msg; msg.hidden = false; } }
+  }
+  function restoreMarks(q){
+    q.parts.forEach(function(p){ var s = state.st[p.id]; if (s){ showMark(p, s); if (p.t === 'grid' && s) gradePart(p); } });
+    scoreLine(q);
+  }
+  function scoreLine(q){
+    var el = $('#' + q.id + ' .qscore'); if (!el) return;
+    var d = q.parts.filter(function(p){ return state.st[p.id] === 'ok'; }).length;
+    var tried = q.parts.some(function(p){ return state.st[p.id]; });
+    el.textContent = tried ? d + '/' + q.parts.length + ' đúng' : '';
+    el.className = 'qscore' + (tried && d === q.parts.length ? ' full' : '');
+  }
+  function checkQ(q){
+    q.parts.forEach(function(p){
+      if (p.t === 'open') return;
+      var r = gradePart(p);
+      if (r.empty){ delete state.st[p.id]; showMark(p, {ok:false, empty:true, msg:'Chưa có câu trả lời.'}); return; }
+      state.st[p.id] = r.ok ? 'ok' : 'bad';
+      showMark(p, r);
+    });
+    save(); scoreLine(q); updateTotals();
+  }
+  function toggle(q, which, btn){
+    var sec = $('#' + q.id), box = $('.' + which, sec), open = box.hidden;
+    box.hidden = !open; btn.setAttribute('aria-expanded', open);
+    if (which === 'sol'){
+      btn.textContent = open ? 'Ẩn đáp án' : 'Hiện đáp án';
+      $$('.pans', sec).forEach(function(x){ x.hidden = !open; });
+      q.parts.forEach(function(p){ if (p.t === 'grid') $$('input[id^="' + p.id + 'r"]', sec).forEach(function(inp){ var m = /r(\d+)c(\d+)$/.exec(inp.id); var cell = p.rows[+m[1]][+m[2]]; inp.setAttribute('placeholder', open ? cell.s : ''); }); });
+      sec.classList.toggle('revealed', open);
+    }
+  }
+
+  /* ---------- events ---------- */
+  var lastField = null;
+  document.addEventListener('focusin', function(e){ if (e.target.matches('input.ans, input.cell, textarea.ans')) lastField = e.target; });
+  document.addEventListener('input', function(e){
+    var t = e.target;
+    if (t.matches('.ans, .cell')){ state.a[t.id] = t.value; var part = t.closest('.part'); if (part && state.st[part.dataset.pid] && PARTS[part.dataset.pid].t !== 'open'){ delete state.st[part.dataset.pid]; showMark(PARTS[part.dataset.pid], null); if (t.matches('.cell')) t.classList.remove('is-ok', 'is-bad'); scoreLine(qOf(part.dataset.pid)); updateTotals(); } save(); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && e.target.matches('input.ans, input.cell')){ e.preventDefault(); var sec = e.target.closest('.q'); if (sec) checkQ(qOf(sec.id)); }
+  });
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var sec = b.closest('.q'), q = sec ? qOf(sec.id) : null;
+    if (b.classList.contains('opt')){
+      var part = b.closest('.part'), pid = part.dataset.pid;
+      $$('.opt', part).forEach(function(o){ o.classList.toggle('on', o === b); o.setAttribute('aria-checked', o === b); });
+      state.a[pid] = b.dataset.val; delete state.st[pid]; showMark(PARTS[pid], null); save(); scoreLine(q); updateTotals(); return;
+    }
+    if (b.dataset.self){ var pp = b.closest('.part'); state.st[pp.dataset.pid] = b.dataset.self; showMark(PARTS[pp.dataset.pid], b.dataset.self); save(); scoreLine(q); updateTotals(); return; }
+    if (b.dataset.act === 'check') return checkQ(q);
+    if (b.dataset.act === 'hint') return toggle(q, 'hint', b);
+    if (b.dataset.act === 'sol') return toggle(q, 'sol', b);
+    if (b.dataset.act === 'clear'){
+      q.parts.forEach(function(p){ delete state.a[p.id]; delete state.st[p.id]; if (p.t === 'grid') Object.keys(state.a).forEach(function(k){ if (k.indexOf(p.id + 'r') === 0) delete state.a[k]; }); });
+      save(); var tmp = document.createElement('div'); tmp.innerHTML = qHTML(CH[+q.id.split('q')[0].slice(1) - 1], q); var fresh = tmp.querySelector('.q'); sec.replaceWith(fresh); scoreLine(q); updateTotals(); return;
+    }
+    if (b.dataset.sym != null){
+      var f = lastField; if (!f || !document.body.contains(f)) return;
+      var s0 = f.selectionStart != null ? f.selectionStart : f.value.length, s1 = f.selectionEnd != null ? f.selectionEnd : s0;
+      f.value = f.value.slice(0, s0) + b.dataset.sym + f.value.slice(s1); f.focus(); var pos = s0 + b.dataset.sym.length; try { f.setSelectionRange(pos, pos); } catch (er) {}
+      f.dispatchEvent(new Event('input', {bubbles:true})); return;
+    }
+    if (b.id === 'reset'){ $('#resetbox').hidden = false; return; }
+    if (b.id === 'resetno'){ $('#resetbox').hidden = true; return; }
+    if (b.id === 'resetyes'){ state = {a:{}, st:{}}; save(); $('#resetbox').hidden = true; render(); return; }
+    if (b.id === 'symtoggle'){ var bar = $('#symbar'); bar.classList.toggle('min'); b.setAttribute('aria-expanded', !bar.classList.contains('min')); return; }
+  });
+  document.addEventListener('mousedown', function(e){ if (e.target.closest('[data-sym]')) e.preventDefault(); });
+  window.addEventListener('hashchange', render);
+
+  var SYMS = ['∪','∩','′','\\','∅','∈','∉','⊆','⊂','×','¬','∧','∨','→','↔','⊕','∀','∃','π','√','²','⁻¹','≥','≤','∞'];
+  $('#syms').innerHTML = SYMS.map(function(s){ return '<button type="button" data-sym="' + esc(s) + '" title="Chèn ' + esc(s) + '">' + esc(s) + '</button>'; }).join('');
+  render();
+})();
+</script>
+</body></html>

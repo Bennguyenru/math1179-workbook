@@ -1,0 +1,11 @@
+{
+  "name": "math1179-workbook",
+  "version": "1.0.0",
+  "description": "Tài liệu ôn tập tương tác cho MATH1179 Mathematics for Computer Science (University of Greenwich)",
+  "private": true,
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "test": "bash scripts/build.sh && node tests/answers.test.js && node tests/inputs.test.js"
+  },
+  "license": "MIT"
+}
